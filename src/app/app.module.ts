@@ -13,13 +13,16 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {FormsModule} from '@angular/forms';
+import { UserBoardComponent } from './components/user-board/user-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserSignComponent,
     CreateUserComponent,
-    SigninUserComponent
+    SigninUserComponent,
+    UserBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
     AngularFireFunctionsModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireMessagingModule
+    AngularFireMessagingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,12 @@
 <form class="signUpForm">
-  <input type="email" placeholder="Type in email" ngModel required/>
+  <input type="email" placeholder="Type in email" [(ngModel)]="userAuthService.userData.email" name="email" ngModel required/>
   <p class="inputFieldError" *ngIf="error"></p>
-  <input type="text" placeholder="Type in username" ngModel required/>
-  <input type="password" placeholder="Type in password" ngModel required/>
+  <input type="text" placeholder="Type in username"  [(ngModel)]="userAuthService.userData.userName" name="userName" ngModel required/>
+  <input type="text" placeholder="Type in first name"  [(ngModel)]="userAuthService.userData.name" name="firstName" ngModel required/>
+  <input type="text" placeholder="Type in last name"  [(ngModel)]="userAuthService.userData.lastName" name="lastName" ngModel required/>
+  <input type="password" placeholder="Type in password"  [(ngModel)]="userAuthService.userData.password" name="password" ngModel required/>
+
+  <div class="error">{{errorMessage}}</div>
   <button type="submit" (click)="createNewUser()">Create User</button>
 </form>
 

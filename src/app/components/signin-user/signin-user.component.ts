@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
+import {UserAuthService} from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-signin-user',
@@ -7,9 +7,8 @@ import { User } from '../../models/user.model';
   styleUrls: ['./signin-user.component.styl']
 })
 export class SigninUserComponent implements OnInit {
-  userData: User;
 
-  constructor() { }
+  constructor(public userAuthService: UserAuthService) { }
 
   ngOnInit() {
   }

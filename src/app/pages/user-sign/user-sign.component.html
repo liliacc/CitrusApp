@@ -3,6 +3,6 @@
   <button (click)="showLogInForm()">Log Me In</button>
   <button (click)="showCreateUserForm()">Sign Me Up</button>
 </section>
-<button>Back</button>
+<button (click)="navigateBack()">Back</button>
 <app-create-user *ngIf="createUserFormActive"></app-create-user>
 <app-signin-user *ngIf="loginFormActive"></app-signin-user>
