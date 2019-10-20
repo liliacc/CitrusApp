@@ -1,0 +1,8 @@
+<h1>Citrus ChatApp</h1>
+<section class="usersignContainer" *ngIf="!createUserFormActive && !loginFormActive">
+  <button (click)="showLogInForm()">Log Me In</button>
+  <button (click)="showCreateUserForm()">Sign Me Up</button>
+</section>
+<button>Back</button>
+<app-create-user *ngIf="createUserFormActive"></app-create-user>
+<app-signin-user *ngIf="loginFormActive"></app-signin-user>

@@ -1,0 +1,8 @@
+<form class="signUpForm">
+  <input type="email" placeholder="Type in email" ngModel required/>
+  <p class="inputFieldError" *ngIf="error"></p>
+  <input type="text" placeholder="Type in username" ngModel required/>
+  <input type="password" placeholder="Type in password" ngModel required/>
+  <button type="submit" (click)="createNewUser()">Create User</button>
+</form>
+

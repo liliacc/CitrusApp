@@ -6,9 +6,11 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
+/.firebase
 # dependencies
 /node_modules
+/src/environments
+.firebaserc
 
 # profiling files
 chrome-profiler-events*.json
@@ -22,6 +24,7 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
+firebase-debug.log
 
 # IDE - VSCode
 .vscode/*
