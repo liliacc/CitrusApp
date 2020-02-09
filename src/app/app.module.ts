@@ -15,6 +15,9 @@ import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {FormsModule} from '@angular/forms';
 import { UserBoardComponent } from './components/user-board/user-board.component';
+import { UserToolBarComponent } from './components/user-tool-bar/user-tool-bar.component';
+import {SearchComponent} from './components/search/search.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { UserBoardComponent } from './components/user-board/user-board.component
     UserSignComponent,
     CreateUserComponent,
     SigninUserComponent,
-    UserBoardComponent
+    UserBoardComponent,
+    UserToolBarComponent,
+    SearchComponent,
+    ChatBoxComponent
   ],
   imports: [
     BrowserModule,

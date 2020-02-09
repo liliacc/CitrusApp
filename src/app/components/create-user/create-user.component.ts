@@ -28,9 +28,7 @@ export class CreateUserComponent implements OnInit {
 
   async createNewUser() {
     const newUserData = {
-      name: this.userAuthService.userData.name,
-      lastName: this.userAuthService.userData.lastName,
-      userName: this.userAuthService.userData.userName,
+      displayName: this.userAuthService.userData.userName,
       email: this.userAuthService.userData.email,
       password: this.userAuthService.userData.password
   };
@@ -38,24 +36,28 @@ export class CreateUserComponent implements OnInit {
     const password = newUserData.password;
 
     this.errorMessage = '';
-    const response = await this.createNewUSerAccount(email, password).catch(error => {
+    const response = await this.createNewUSerAccount(email, password)
+      .then(async data => {
+        await new Promise<any>((resolve, reject) => {
+          this.firestore
+            .collection('users')
+            .doc(data.user.uid)
+            .set({username: this.userAuthService.userData.userName})
+            .then(() => {
+              this.router.navigate(['/userBoard']);
+            });
+        });
+      })
+      .catch(error => {
       console.error(1, error);
       this.errorMessage = error.message;
     });
 
-    if (!response) {
-      return;
-    }
+
 
     console.error(2, response);
-    await new Promise<any>((resolve, reject) => {
-        this.firestore
-          .collection('users')
-          .add(newUserData);
 
-      });
 
-    this.router.navigate(['/userBoard']);
 
 
   }

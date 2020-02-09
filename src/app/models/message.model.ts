@@ -1,7 +1,4 @@
 export class Message {
-  text: string;
-  sender: string;
-  date: Date;
-  imgUrl: string;
-  isSelf: boolean;
+  message: string;
+  uid: string;
 }
