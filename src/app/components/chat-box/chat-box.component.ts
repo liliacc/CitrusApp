@@ -37,6 +37,8 @@ export class ChatBoxComponent implements OnInit {
           this.chatId = doc.id;
           found = true;
         }
+        this.db.collection('chats').doc(doc.id).get().subscribe(it => this.messages = it.data().messages);
+        this.chat.subscribe(it => this.messages = it.messages);
       });
       if (!found) {
         this.db
@@ -44,6 +46,7 @@ export class ChatBoxComponent implements OnInit {
           .add({messages: [], users: [this.userAuthService.userData.id, this.messagingService.otherUser.id]})
           .then((doc2) => {
             this.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
+            this.db.collection('chats').doc(doc2.id).get().subscribe(it => this.messages = it.data().messages);
             this.chat.subscribe(it => this.messages = it.messages);
             this.chatId = doc2.id;
           });
@@ -51,8 +54,14 @@ export class ChatBoxComponent implements OnInit {
       }
     });
 
+
+
   }
    sendMessage() {
+    if (!this.messages) {
+      console.error('wrong', this.messages);
+      return;
+    }
     this.messages.push({message: this.messsageText, uid:  this.messagingService.otherUser.id});
     this.db
       .collection('chats')
