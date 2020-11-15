@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserAuthService} from '../../services/user-auth.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {MessagingService} from '../../services/messaging.service';
+import {Router} from '@angular/router';
 import {User} from '../../models/user.model';
 
 @Component({
@@ -13,9 +14,13 @@ import {User} from '../../models/user.model';
 export class UserBoardComponent implements OnInit {
   constructor(private userAuthService: UserAuthService,
               public db: AngularFirestore,
-              public messagingService: MessagingService) { }
+              public messagingService: MessagingService,
+              public router: Router) { }
 
   ngOnInit() {
+    if (!this.userAuthService.userData.id) {
+      this.router.navigate(['/SignUser']);
+    }
     this.db.collection('users').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
         this.messagingService.users.push({userName: doc.data().username, id: doc.id} as User);

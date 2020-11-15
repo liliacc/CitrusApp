@@ -16,10 +16,12 @@ export class SearchComponent implements OnInit {
   constructor(private utils: UtilsService) { }
 
   onEnterPress() {
-    console.error('ārray', this.dataArray);
-   const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
-   if (foundObject !== null && foundObject !== undefined) {
-     this.foundObject.emit(foundObject);
+    console.error('array', this.dataArray);
+    const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
+    console.error('foundObject', foundObject);
+    if (foundObject !== null && foundObject !== undefined) {
+      console.error('in condition');
+      this.foundObject.emit(foundObject);
    }
   }
   ngOnInit() {

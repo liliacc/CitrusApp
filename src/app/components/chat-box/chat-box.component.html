@@ -1,5 +1,6 @@
-<ul *ngIf="chat">
-  <li *ngFor="let message of (chat | async).messages"></li>
+<!--*ngIf="chat | async"-->
+<ul>
+  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>
 </ul>
 <textarea [(ngModel)]="messsageText"></textarea>
 <button (click)="sendMessage()">Send</button>

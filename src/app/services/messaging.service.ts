@@ -12,5 +12,6 @@ export class MessagingService {
 
   startChat(user: User) {
     this.otherUser = user;
+    console.error('otherUser', this.otherUser);
   }
 }

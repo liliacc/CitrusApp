@@ -42,7 +42,11 @@ export class CreateUserComponent implements OnInit {
           this.firestore
             .collection('users')
             .doc(data.user.uid)
-            .set({username: this.userAuthService.userData.userName})
+            .set({
+              username: this.userAuthService.userData.userName,
+              name: this.userAuthService.userData.name,
+              lastName: this.userAuthService.userData.lastName
+            })
             .then(() => {
               this.router.navigate(['/userBoard']);
             });

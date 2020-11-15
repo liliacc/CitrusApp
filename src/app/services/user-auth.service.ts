@@ -21,6 +21,7 @@ export class UserAuthService {
   }
 
   signInUser() {
+    console.error('signIn F');
     const email = this.typedInEmailForSignIn;
     const password = this.typedInPassForSignIn;
     this.errorMessage = '';
@@ -28,9 +29,11 @@ export class UserAuthService {
       .then(loginResponsePayload => {
         console.error(loginResponsePayload.user.uid);
         this.db.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(userData => {
+          console.error('callback');
           this.userData.userName = userData.data().username;
           this.userData.id = loginResponsePayload.user.uid;
           this.router.navigate(['/userBoard']);
+          console.error(this.userData.userName,  this.userData.id);
         });
       })
       .catch(error => {
@@ -39,6 +42,7 @@ export class UserAuthService {
   }
 
   signOut() {
+    console.error('signOut');
     return this.angularFireAuth.auth.signOut().then(() => {
       this.router.navigate(['SignUser']);
     });
