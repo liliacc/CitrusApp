@@ -3,12 +3,12 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-sign',
-  templateUrl: './user-sign.component.html',
-  styleUrls: ['./user-sign.component.styl']
+  templateUrl: './login.html',
+  styleUrls: ['./login.styl']
 })
-export class UserSignComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
-  loginFormActive = false;
+  loginFormActive = true;
   createUserFormActive = false;
 
   constructor() { }

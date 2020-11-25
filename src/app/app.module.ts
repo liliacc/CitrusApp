@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserSignComponent } from './pages/user-sign/user-sign.component';
+import { LoginComponent } from './pages/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { SigninUserComponent } from './components/signin-user/signin-user.component';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
@@ -22,7 +22,7 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserSignComponent,
+    LoginComponent,
     CreateUserComponent,
     SigninUserComponent,
     UserBoardComponent,
