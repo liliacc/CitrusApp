@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-user-sign',
@@ -8,24 +9,13 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  loginFormActive = true;
-  createUserFormActive = false;
 
-  constructor() { }
+
+  constructor(
+    public loginService: LoginService
+  ) { }
 
   ngOnInit() {
   }
 
-
-  showLogInForm() {
-    this.loginFormActive = true;
-  }
-
-  showCreateUserForm() {
-    this.createUserFormActive = true;
-  }
-  navigateBack() {
-    this.createUserFormActive = false;
-    this.loginFormActive = false;
-  }
 }

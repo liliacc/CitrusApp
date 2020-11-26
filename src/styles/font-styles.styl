@@ -1,35 +1,57 @@
 @font-face
   font-family: manrope-bold
-  src: url(assets/fonts/Manrope/static/Manrope-Bold.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-Bold.ttf)
 
 @font-face
   font-family: manrope-extra-bold
-  src: url(assets/fonts/Manrope/static/Manrope-ExtraBold.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-ExtraBold.ttf)
 
 @font-face
   font-family: manrope-extra-light
-  src: url(assets/fonts/Manrope/static/Manrope-ExtraLight.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-ExtraLight.ttf)
 
 @font-face
   font-family: manrope-light
-  src: url(assets/fonts/Manrope/static/Manrope-Light.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-Light.ttf)
 
 @font-face
   font-family: manrope-medium
-  src: url(assets/fonts/Manrope/static/Manrope-Medium.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-Medium.ttf)
 
 @font-face
   font-family: manrope-regular
-  src: url(assets/fonts/Manrope/static/Manrope-Regular.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-Regular.ttf)
 
 @font-face
   font-family: manrope-semi-bold
-  src: url(assets/fonts/Manrope/static/Manrope-SemiBold.ttf)
+  src: url(/src/assets/fonts/Manrope/static/Manrope-SemiBold.ttf)
 
 @font-face
   font-family: metropolis-black
-  src: url(assets/fonts/Metropolis/Metropolis-Black.otf)
+  src: url(/src/assets/fonts/Metropolis/Metropolis-Black.otf)
 
 @font-face
   font-family: metropolis-regular
-  src: url(assets/fonts/Metropolis/Metropolis-Regular.otf)
+  src: url(/src/assets/fonts/Metropolis/Metropolis-Regular.otf)
+/*
+font vars
+*/
+/*
+px to em
+14px - 0.87em
+30 - 1.87
+24 - 1.5
+20 - 1.25
+96 - 6
+48 - 3
+*/
+--var-base-body-text = 1em metropolis-regular, sans-serif
+--var-base-body-caption = 1em manrope-extra-bold, sans-serif
+
+--var-small-body-text = 0.87em manrope-extra-bold, sans-serif
+--var-bold-text = 1em manrope-bold, sans-serif
+
+--var-app-heading = 6em manrope-extra-bold, sans-serif
+--var-h1 = 1.87em manrope-extra-bold, sans-serif
+--var-nav-item = 1.87em manrope-extra-bold, sans-serif
+--var-form-caption = 3em manrope-extra-bold, sans-serif

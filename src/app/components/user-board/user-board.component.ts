@@ -12,7 +12,7 @@ import {User} from '../../models/user.model';
 })
 
 export class UserBoardComponent implements OnInit {
-  constructor(private userAuthService: UserAuthService,
+  constructor(public userAuthService: UserAuthService,
               public db: AngularFirestore,
               public messagingService: MessagingService,
               public router: Router) { }

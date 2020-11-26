@@ -1,6 +1,5 @@
 <div style="display: flex; flex-direction: row; flex: 1 1 200px;">
   <h1>Hello {{userAuthService.userData.userName}}</h1>
-  <button (click)="this.userAuthService.signOut()" style="width: 60px; height: 38px; tex-align: center; background-color: teal; color: white; border-radius: 3px;">SignOut</button>
 </div>
 <app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="messagingService.startChat($event)"></app-search>
 <app-chat-box *ngIf="messagingService.otherUser !== null"></app-chat-box>

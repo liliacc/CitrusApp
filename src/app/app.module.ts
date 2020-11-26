@@ -18,6 +18,10 @@ import { UserBoardComponent } from './components/user-board/user-board.component
 import { UserToolBarComponent } from './components/user-tool-bar/user-tool-bar.component';
 import {SearchComponent} from './components/search/search.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import {HeaderComponent} from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HelpComponent } from './pages/help/help.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
     UserBoardComponent,
     UserToolBarComponent,
     SearchComponent,
-    ChatBoxComponent
+    ChatBoxComponent,
+    HeaderComponent,
+    FooterComponent,
+    HelpComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,10 @@
-<form id="signIn">
-  <input type="email" placeholder="email" name="email" [(ngModel)]="userAuthService.typedInEmailForSignIn"/>
-  <input type="password" placeholder="Type in password" name="password" [(ngModel)]="userAuthService.typedInPassForSignIn"/>
-  <button type="submit" (click)="userAuthService.signInUser()">Sign In</button>
-  <div class="errorMessage">{{userAuthService.errorMessage}}</div>
+<form id="signIn" class="form-container center-container">
+  <div class="form-group center-container">
+    <h1 class="form-caption text-center">Ienākt</h1>
+    <input class="input-field w-100" type="email" placeholder="email" name="email" [(ngModel)]="userAuthService.typedInEmailForSignIn"/>
+    <input class="input-field w-100" type="password" placeholder="Type in password" name="password" [(ngModel)]="userAuthService.typedInPassForSignIn"/>
+    <button class="w-100 btn-primary" type="submit" (click)="userAuthService.signInUser()">Sign In</button>
+    <div class="errorMessage">{{userAuthService.errorMessage}}</div>
+    <div class="w-100 underlined-figure text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
+  </div>
 </form>

@@ -5,6 +5,7 @@ import {UserAuthService} from '../../services/user-auth.service';
 import { auth } from 'firebase/app';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-create-user',
@@ -18,7 +19,8 @@ export class CreateUserComponent implements OnInit {
   constructor(private firestore: AngularFirestore,
               public userAuthService: UserAuthService,
               public angularFireAuth: AngularFireAuth,
-              public router: Router ) { }
+              public router: Router,
+              public loginService: LoginService) { }
 
   ngOnInit() {
   }

@@ -1,0 +1,19 @@
+@import "../../../styles/colors.styl"
+@import "../../../styles/font-styles.styl"
+@import '../../../styles.styl'
+
+.app-header
+  background-color: --var-color-primary-0
+  height: --var-app-header-height
+  padding: 0 52px
+  .navigation-item
+    cursor: pointer
+    padding: 0 40px
+    font: --var-nav-item = 1.87em manrope-extra-bold, sans-serif
+    a
+      color: --var-color-secondary-3-1
+    &:last-child
+      color: --var-color-secondary-2-1
+    &.active
+      a
+        color: --var-color-primary-2

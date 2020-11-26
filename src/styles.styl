@@ -4,17 +4,124 @@
 /*
 globals, base styles
 */
+:root
+  font-family: metropolis-regular, sans-serif
+  font-size: 16px
+  outline-color: --var-color-primary-0
+  &:focus
+    border-color: --var-color-primary-0
+    outline-color: --var-color-primary-0
+
+--var-app-header-height = 120px
+--var-app-footer-height = 93px
+
+/*
+px to em
+14px - 0.87em
+30 - 1.87
+24 - 1.5
+20 - 1.25
+96 - 6
+48 - 3
+*/
 
 html,
 body
   width: 100%
   height: 100%
-  max-width: 1920px
-  font-family: metropolis-regular, sans-serif
   margin: 0
   padding: 0
   overflow: hidden
+input
+  display: block
+button
+  height: 38px
+  border: none
+  cursor: pointer
+ul
+  margin: 0
+  list-style-type: none
+a
+  text-decoration: none
+.center-container
+  margin: 0 auto
+/*
+layout
+*/
+.container
+  width: 100%
+  height: 100%
+  max-width: 1920px
+  padding: 0
+.page-container
+  height: "calc(100% - %s - %s)" % (--var-app-header-height --var-app-footer-height)
+.main-heading
+  font: --var-app-heading
+  color: --var-color-secondary-1-1
+.text-center
+ text-align: center
+.text-right
+  text-align: right
+.text-left
+  text-align: left
+.w-100
+  width: 100%
 
 
+  /*
+  flex
+  */
+.space-between
+  justify-content: space-between
+.flex-align-center
+  align-items: center
+.flex-horizontal
+  display: flex
+  flex-direction: horizontal
 
+.flex-vertical
+  display: flex
+  flex-direction: column
+/*
+global, shared
+ */
+
+.btn-primary
+  background-color: --var-color-secondary-1-1
+  color: white
+  font: --var-bold-text
+
+.underlined-figure
+  text-decoration: underline
+  color: --var-color-transparent-2
+  font: --var-bold-text
+  cursor: pointer
+/*
+form
+*/
+.form-container
+  width: 1034px
+  height: auto
+  padding: 133px 0
+  background-color: --var-color-primary-0
+  box-sizing: border-box
+  .form-group
+    width: 662px
+    .form-caption
+      font: --var-form-caption
+      color: --var-color-secondary-1-1
+      margin: 0
+
+.input-field
+  height: 38px
+  box-sizing: border-box
+  margin: 10px 0
+  background-color: --var-color-transparent-1
+  border-color: transparent
+  &:placeholder
+    background-color: --var-color-transparent-2
+    font: --var-bold-text
+  &:focus
+    border-color: transparent
+    outline-color: transparent
 

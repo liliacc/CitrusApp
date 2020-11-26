@@ -1,4 +1,11 @@
-<router-outlet></router-outlet>
+<div class="container app-container center-container">
+  <app-header></app-header>
+    <div class="page-container">
+      <router-outlet></router-outlet>
+    </div>
+  <app-footer></app-footer>
+</div>
+
 <ul>
   <li class="text" *ngFor="let item of items | async">
     {{item.name}} {{item.lastName}}

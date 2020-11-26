@@ -12,6 +12,8 @@ export class UserAuthService {
   typedInEmailForSignIn = '';
   typedInPassForSignIn = '';
   errorMessage = '';
+  loginFormActive = true;
+  createUserFormActive = false;
 
   userData: User = new User();
 
