@@ -1,5 +1,19 @@
-<div style="display: flex; flex-direction: row; flex: 1 1 200px;">
-  <h1>Hello {{userAuthService.userData.userName}}</h1>
+<div class="options-container flex-horizontal">
+    <h1>Hello {{userAuthService.userData.userName}}</h1>
+  <app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="messagingService.startChat($event)"></app-search>
 </div>
-<app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="messagingService.startChat($event)"></app-search>
-<app-chat-box *ngIf="messagingService.otherUser !== null"></app-chat-box>
+<div class="messaging-container flex-horizontal">
+  <ul class="messages-list">
+    <li class="messages-list-item flex-horizontal flex-align-center selected">
+      <span class="caption overflow-ellipsis">Vandassfsdsdfszxczzxczcxzxczczczcxczxczcdfsdf</span>
+      <span class="text overflow-ellipsis">Lorem ipsum sit dolore Lorem ipsum sit dp0</span>
+    </li>
+    <li class="messages-list-item"></li>
+    <li class="messages-list-item"></li>
+  </ul>
+  <div class="chatbox-container">
+
+    <app-chat-box *ngIf="messagingService.otherUser !== null"></app-chat-box>
+  </div>
+
+</div>

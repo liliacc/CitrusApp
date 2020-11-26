@@ -77,7 +77,7 @@ layout
   align-items: center
 .flex-horizontal
   display: flex
-  flex-direction: horizontal
+  flex-direction: row
 
 .flex-vertical
   display: flex
@@ -85,7 +85,10 @@ layout
 /*
 global, shared
  */
-
+.overflow-ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
 .btn-primary
   background-color: --var-color-secondary-1-1
   color: white
@@ -96,6 +99,18 @@ global, shared
   color: --var-color-transparent-2
   font: --var-bold-text
   cursor: pointer
+.options-container
+  height: --var-app-header-height
+.messaging-container
+  height: "calc(100% - %s)" % (--var-app-header-height)
+.messages-list
+  width: 45%
+.chatbox-container
+  width: 65%
+.messages-list,
+.chatbox-container
+  padding: 52px
+  box-sizing: border-box
 /*
 form
 */
