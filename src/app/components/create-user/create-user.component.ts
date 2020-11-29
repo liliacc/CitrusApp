@@ -33,6 +33,7 @@ export class CreateUserComponent implements OnInit {
       displayName: this.userAuthService.user.userName,
       email: this.userAuthService.user.email,
       password: this.userAuthService.user.password,
+      myChats: []
   };
     const email = newUserData.email;
     const password = newUserData.password;
@@ -48,6 +49,7 @@ export class CreateUserComponent implements OnInit {
               username: this.userAuthService.user.userName,
               name: this.userAuthService.user.name,
               lastName: this.userAuthService.user.lastName,
+              myChats: this.userAuthService.user.myChats
             })
             .then(() => {
               this.userAuthService.user.id = data.user.uid;

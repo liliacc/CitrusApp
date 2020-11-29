@@ -14,7 +14,8 @@ import {Message} from '../../models/message.model';
 })
 
 export class ChatBoxComponent implements OnInit {
-  chat: Observable<Chat>;
+
+  @Input() chat: Observable<Chat>;
   chatId: string;
   id: any;
   messsageText = '';
@@ -26,32 +27,32 @@ export class ChatBoxComponent implements OnInit {
   ngOnInit() {
     this.id = this.userAuthService.user.id;
     console.error('onInit', this.userAuthService.user);
-    this.db.collection('chats').get().subscribe(querySnapshot => {
-      let found = false;
-      querySnapshot.forEach(doc => {
-        const users: string[] = doc.data().users;
-        if (users.includes(this.messagingService.otherUser.id) && users.includes(this.userAuthService.user.id)) {
-          console.error('in a cond');
-          this.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
-          this.chatId = doc.id;
-          found = true;
-        }
-        this.db.collection('chats').doc(doc.id).get().subscribe(it => this.messages = it.data().messages);
-        this.chat.subscribe(it => this.messages = it.messages);
-      });
-      if (!found) {
-        this.db
-          .collection('chats')
-          .add({messages: [], users: [this.userAuthService.user.id, this.messagingService.otherUser.id]})
-          .then((doc2) => {
-            this.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
-            this.db.collection('chats').doc(doc2.id).get().subscribe(it => this.messages = it.data().messages);
-            this.chat.subscribe(it => this.messages = it.messages);
-            this.chatId = doc2.id;
-          });
-
-      }
-    });
+    // this.db.collection('chats').get().subscribe(querySnapshot => {
+    //   let found = false;
+    //   querySnapshot.forEach(doc => {
+    //     const users: string[] = doc.data().users;
+    //     if (users.includes(this.messagingService.otherUser.id) && users.includes(this.userAuthService.user.id)) {
+    //       console.error('in a cond');
+    //       this.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
+    //       this.chat.subscribe(it => this.messages = it.messages);
+    //       this.chatId = doc.id;
+    //       found = true;
+    //     }
+    //     this.db.collection('chats').doc(doc.id).get().subscribe(it => this.messages = it.data().messages);
+    //   });
+    //   if (!found) {
+    //     this.db
+    //       .collection('chats')
+    //       .add({messages: [], users: [this.userAuthService.user.id, this.messagingService.otherUser.id]})
+    //       .then((doc2) => {
+    //         this.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
+    //         this.db.collection('chats').doc(doc2.id).get().subscribe(it => this.messages = it.data().messages);
+    //         this.chat.subscribe(it => this.messages = it.messages);
+    //         this.chatId = doc2.id;
+    //       });
+    //
+    //   }
+    // });
 
 
 

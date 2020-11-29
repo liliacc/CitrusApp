@@ -5,4 +5,5 @@ export class User {
   id: string;
   email: string;
   password: string;
+  myChats: string[] = [];
 }
