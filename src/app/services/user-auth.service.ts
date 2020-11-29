@@ -3,26 +3,35 @@ import {User} from '../models/user.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {Chat} from '../models/chat.model';
+import {Message} from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserAuthService {
+
+  chat: Observable<Chat>;
+  user: User = new User();
+  message: Message[];
+  email: string;
+  password: any;
   typedInEmailForSignIn = '';
   typedInPassForSignIn = '';
   errorMessage = '';
   loginFormActive = true;
   createUserFormActive = false;
 
-  userData: User = new User();
-
+  userId: string;
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
               public db: AngularFirestore) {
   }
-
+// log in existing user
   signInUser() {
+    this.user = new User();
     console.error('signIn F');
     const email = this.typedInEmailForSignIn;
     const password = this.typedInPassForSignIn;
@@ -32,10 +41,10 @@ export class UserAuthService {
         console.error(loginResponsePayload.user.uid);
         this.db.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(userData => {
           console.error('callback');
-          this.userData.userName = userData.data().username;
-          this.userData.id = loginResponsePayload.user.uid;
+          this.user.userName = userData.data().username;
+          this.userId = loginResponsePayload.user.uid;
           this.router.navigate(['/userBoard']);
-          console.error(this.userData.userName,  this.userData.id);
+          console.error(this.user.userName,  this.userId);
         });
       })
       .catch(error => {
@@ -46,7 +55,7 @@ export class UserAuthService {
   signOut() {
     console.error('signOut');
     return this.angularFireAuth.auth.signOut().then(() => {
-      this.router.navigate(['SignUser']);
+      this.router.navigate(['login']);
     });
   }
 

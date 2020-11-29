@@ -6,6 +6,7 @@ import { auth } from 'firebase/app';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import {LoginService} from '../../services/login.service';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-create-user',
@@ -15,7 +16,6 @@ import {LoginService} from '../../services/login.service';
 export class CreateUserComponent implements OnInit {
   error = false;
   errorMessage: string;
-
   constructor(private firestore: AngularFirestore,
               public userAuthService: UserAuthService,
               public angularFireAuth: AngularFireAuth,
@@ -29,15 +29,18 @@ export class CreateUserComponent implements OnInit {
     }
 
   async createNewUser() {
+    // values are taken from inputs, exept for marray, it is set to empty array
     const newUserData = {
-      displayName: this.userAuthService.userData.userName,
-      email: this.userAuthService.userData.email,
-      password: this.userAuthService.userData.password
+      displayName: this.userAuthService.user.userName,
+      email: this.userAuthService.email,
+      password: this.userAuthService.password
   };
     const email = newUserData.email;
     const password = newUserData.password;
 
     this.errorMessage = '';
+// Creates user in auth system asynchronously, first waits new user colection creation in firestore, then waits for new document creation with set fields.
+    console.error(this.userAuthService.user);
     const response = await this.createNewUSerAccount(email, password)
       .then(async data => {
         await new Promise<any>((resolve, reject) => {
@@ -45,11 +48,12 @@ export class CreateUserComponent implements OnInit {
             .collection('users')
             .doc(data.user.uid)
             .set({
-              username: this.userAuthService.userData.userName,
-              name: this.userAuthService.userData.name,
-              lastName: this.userAuthService.userData.lastName
+              username: this.userAuthService.user.userName,
+              name: this.userAuthService.user.name,
+              lastName: this.userAuthService.user.lastName
             })
             .then(() => {
+              console.error('ddfsfgsdfgsdg');
               this.router.navigate(['/userBoard']);
             });
         });
@@ -58,13 +62,5 @@ export class CreateUserComponent implements OnInit {
       console.error(1, error);
       this.errorMessage = error.message;
     });
-
-
-
-    console.error(2, response);
-
-
-
-
   }
 }

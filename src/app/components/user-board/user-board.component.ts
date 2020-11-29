@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {MessagingService} from '../../services/messaging.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user.model';
+import {Chat} from '../../models/chat.model';
 
 @Component({
   selector: 'app-user-board',
@@ -17,15 +18,20 @@ export class UserBoardComponent implements OnInit {
               public messagingService: MessagingService,
               public router: Router) { }
 
-  ngOnInit() {
-    if (!this.userAuthService.userData.id) {
-      this.router.navigate(['/SignUser']);
+  async ngOnInit() {
+    if (!this.userAuthService.userId) {
+      this.router.navigate(['/login']);
     }
     this.db.collection('users').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
-        this.messagingService.users.push({userName: doc.data().username, id: doc.id} as User);
+        this.messagingService.users.push({userName: doc.data().username, id: doc.id} as unknown as User);
       });
     });
     console.log(1231231323, this.messagingService.users);
+    // for (const chatId of this.userAuthService.user.myChats) {
+    //   const chatDocument = await this.db.collection('chats').doc(chatId).get().toPromise();
+    //   const chat = chatDocument.data();
+    //   console.error('EEEE', chat);
+    // }
   }
 }

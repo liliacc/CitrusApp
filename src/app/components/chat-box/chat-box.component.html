@@ -1,6 +1,16 @@
 <!--*ngIf="chat | async"-->
+chatbox component works
+<div class="messages-container">
+
+</div>
+<div class="textbox-container">
+</div>
 <ul>
-  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>
+<!--  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>-->
+    <li *ngFor="let message of (chat | async)?.messages">
+      <app-message [message]="message"></app-message>
+      sdfsdfdsfsdfsfssfsdfsdsdf
+    </li>
 </ul>
-<textarea [(ngModel)]="messsageText"></textarea>
-<button (click)="sendMessage()">Send</button>
+<textarea [(ngModel)]="messsageText" (keydown.enter)="sendMessage()"></textarea>
+<!--<button  (click)="sendMessage()">Send</button>-->
