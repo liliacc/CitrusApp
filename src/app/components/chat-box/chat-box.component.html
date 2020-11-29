@@ -1,6 +1,21 @@
+<!--&lt;!&ndash;*ngIf="chat | async"&ndash;&gt;-->
+<!--<ul>-->
+<!--  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>-->
+<!--</ul>-->
+<!--<textarea [(ngModel)]="messsageText"></textarea>-->
+<!--<button (click)="sendMessage()">Send</button>-->
 <!--*ngIf="chat | async"-->
-<ul>
-  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>
-</ul>
-<textarea [(ngModel)]="messsageText"></textarea>
-<button (click)="sendMessage()">Send</button>
+<div class="messages-container">
+  <ul>
+    <!--  <li *ngFor="let message of (chat | async)?.messages">{{message.message}}</li>-->
+    <li *ngFor="let message of (chat | async)?.messages">
+      <app-message [message]="message"></app-message>
+      sdfsdfdsfsdfsfssfsdfsdsdf
+    </li>
+  </ul>
+</div>
+<div class="textbox-container">
+  <textarea [(ngModel)]="messsageText" (keydown.enter)="sendMessage()"></textarea>
+</div>
+
+<!--<button  (click)="sendMessage()">Send</button>-->

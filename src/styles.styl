@@ -14,6 +14,8 @@ globals, base styles
 
 --var-app-header-height = 120px
 --var-app-footer-height = 93px
+--var-app-text-box-height = 118px
+
 
 /*
 px to em
@@ -94,11 +96,16 @@ global, shared
   color: white
   font: --var-bold-text
 
+.vertical-border
+  border-right: 1px solid --var-color-primary-3
 .underlined-figure
   text-decoration: underline
   color: --var-color-transparent-2
   font: --var-bold-text
   cursor: pointer
+/*
+layout
+*/
 .options-container
   height: --var-app-header-height
 .messaging-container
@@ -107,10 +114,18 @@ global, shared
   width: 45%
 .chatbox-container
   width: 65%
+  box-sizing: border-box
+  position: relative
+  overflow: hidden
 .messages-list,
 .chatbox-container
-  padding: 52px
+  padding: 0 52px
   box-sizing: border-box
+  margin-bottom: 33px
+.messages-container
+  height: "calc(100% - %s - 6px)" %(--var-app-text-box-height)
+  overflow: scroll
+
 /*
 form
 */
