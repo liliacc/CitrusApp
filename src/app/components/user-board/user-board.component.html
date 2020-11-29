@@ -1,5 +1,5 @@
 <div class="options-container flex-horizontal">
-    <h1>Hello {{userAuthService.userData.userName}}</h1>
+    <h1>Hello {{userAuthService.user.userName}}</h1>
   <app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="messagingService.startChat($event)"></app-search>
 </div>
 <div class="messaging-container flex-horizontal">

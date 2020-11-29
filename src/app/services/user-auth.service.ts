@@ -15,7 +15,7 @@ export class UserAuthService {
   loginFormActive = true;
   createUserFormActive = false;
 
-  userData: User = new User();
+  user: User = new User();
 
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
@@ -30,12 +30,12 @@ export class UserAuthService {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then(loginResponsePayload => {
         console.error(loginResponsePayload.user.uid);
-        this.db.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(userData => {
+        this.db.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(user => {
           console.error('callback');
-          this.userData.userName = userData.data().username;
-          this.userData.id = loginResponsePayload.user.uid;
+          this.user.userName = user.data().username;
+          this.user.id = loginResponsePayload.user.uid;
           this.router.navigate(['/userBoard']);
-          console.error(this.userData.userName,  this.userData.id);
+          console.error(this.user.userName,  this.user.id);
         });
       })
       .catch(error => {

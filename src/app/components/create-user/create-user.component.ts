@@ -30,9 +30,9 @@ export class CreateUserComponent implements OnInit {
 
   async createNewUser() {
     const newUserData = {
-      displayName: this.userAuthService.userData.userName,
-      email: this.userAuthService.userData.email,
-      password: this.userAuthService.userData.password
+      displayName: this.userAuthService.user.userName,
+      email: this.userAuthService.user.email,
+      password: this.userAuthService.user.password
   };
     const email = newUserData.email;
     const password = newUserData.password;
@@ -45,9 +45,9 @@ export class CreateUserComponent implements OnInit {
             .collection('users')
             .doc(data.user.uid)
             .set({
-              username: this.userAuthService.userData.userName,
-              name: this.userAuthService.userData.name,
-              lastName: this.userAuthService.userData.lastName
+              username: this.userAuthService.user.userName,
+              name: this.userAuthService.user.name,
+              lastName: this.userAuthService.user.lastName
             })
             .then(() => {
               this.router.navigate(['/userBoard']);

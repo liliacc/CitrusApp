@@ -8,7 +8,7 @@ import {UtilsService} from '../../services/utils.service';
 })
 export class SearchComponent implements OnInit {
   searchedText = '';
-
+  searchUser = false;
   @Input() dataArray: any[];
   @Input() atributeName: string;
 
@@ -16,6 +16,8 @@ export class SearchComponent implements OnInit {
   constructor(private utils: UtilsService) { }
 
   onEnterPress() {
+
+    this.searchUser = false;
     console.error('array', this.dataArray);
     const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
     console.error('foundObject', foundObject);

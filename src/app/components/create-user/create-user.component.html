@@ -1,12 +1,12 @@
 <form class="form-container signUpForm center-container">
   <div class="form-group  center-container">
     <h1 class="form-caption text-center">Izveidot kontu</h1>
-    <input class="input-field w-100" type="email" placeholder="Type in email" [(ngModel)]="userAuthService.userData.email" name="email" ngModel required/>
+    <input class="input-field w-100" type="email" placeholder="Type in email" [(ngModel)]="userAuthService.user.email" name="email" ngModel required/>
     <p class="inputFieldError" *ngIf="error"></p>
-    <input class="input-field w-100" type="text" placeholder="Type in username"  [(ngModel)]="userAuthService.userData.userName" name="userName" ngModel required/>
-    <input class="input-field w-100" type="text" placeholder="Type in first name"  [(ngModel)]="userAuthService.userData.name" name="firstName" ngModel required/>
-    <input class="input-field w-100" type="text" placeholder="Type in last name"  [(ngModel)]="userAuthService.userData.lastName" name="lastName" ngModel required/>
-    <input class="input-field w-100" type="password" placeholder="Type in password"  [(ngModel)]="userAuthService.userData.password" name="password" ngModel required/>
+    <input class="input-field w-100" type="text" placeholder="Type in username"  [(ngModel)]="userAuthService.user.userName" name="userName" ngModel required/>
+    <input class="input-field w-100" type="text" placeholder="Type in first name"  [(ngModel)]="userAuthService.user.name" name="firstName" ngModel required/>
+    <input class="input-field w-100" type="text" placeholder="Type in last name"  [(ngModel)]="userAuthService.user.lastName" name="lastName" ngModel required/>
+    <input class="input-field w-100" type="password" placeholder="Type in password"  [(ngModel)]="userAuthService.user.password" name="password" ngModel required/>
     <div class="underlined-figure w-100 text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
     <div class="error">{{errorMessage}}</div>
   </div>

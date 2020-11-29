@@ -18,8 +18,8 @@ export class UserBoardComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
-    if (!this.userAuthService.userData.id) {
-      this.router.navigate(['/SignUser']);
+    if (!this.userAuthService.user.id) {
+      this.router.navigate(['/login']);
     }
     this.db.collection('users').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
