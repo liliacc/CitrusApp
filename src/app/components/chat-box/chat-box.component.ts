@@ -57,7 +57,7 @@ export class ChatBoxComponent implements OnInit {
 
   }
    sendMessage() {
-    if (this.messsageText = '') { return; }
+    if (this.messsageText === '') { return; }
      if (!this.messages) {
       console.error('wrong', this.messages);
       return;
@@ -67,8 +67,7 @@ export class ChatBoxComponent implements OnInit {
       .collection('chats')
       .doc(this.chatId)
       .update({messages:  this.messages});
-     this.messsageText = '';
-     // this.messsageText = '';
+      this.messsageText = '';
 
   }
 

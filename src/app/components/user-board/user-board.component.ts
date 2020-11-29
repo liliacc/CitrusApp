@@ -19,6 +19,7 @@ export class UserBoardComponent implements OnInit {
 
   ngOnInit() {
     if (!this.userAuthService.user.id) {
+      console.error('navigateBack');
       this.router.navigate(['/login']);
     }
     this.db.collection('users').get().subscribe(querySnapshot => {

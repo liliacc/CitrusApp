@@ -46,7 +46,7 @@ export class UserAuthService {
   signOut() {
     console.error('signOut');
     return this.angularFireAuth.auth.signOut().then(() => {
-      this.router.navigate(['SignUser']);
+      this.router.navigate(['login']);
     });
   }
 
