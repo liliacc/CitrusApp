@@ -18,11 +18,8 @@ export class SearchComponent implements OnInit {
   onEnterPress() {
 
     this.searchUser = false;
-    console.error('array', this.dataArray);
     const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
-    console.error('foundObject', foundObject);
     if (foundObject !== null && foundObject !== undefined) {
-      console.error('in condition');
       this.foundObject.emit(foundObject);
    }
   }

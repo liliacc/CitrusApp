@@ -25,13 +25,9 @@ export class ChatBoxComponent implements OnInit {
               ) { }
   ngOnInit() {
     this.id = this.userAuthService.user.id;
-    console.error('onInit', this.userAuthService.user);
-
-
   }
    sendMessage() {
     if (this.messsageText === '') { return; }
-    console.error(this.userAuthService.chatId, this.messsageText);
     this.db.collection('chats').doc(this.userAuthService.chatId).update({
          messages: firestore.FieldValue.arrayUnion({ message: this.messsageText, user: this.userAuthService.user.userName})
      });

@@ -51,17 +51,13 @@ export class CreateUserComponent implements OnInit {
             })
             .then(() => {
               this.userAuthService.user.id = data.user.uid;
-              console.error('navigate');
               this.router.navigate(['/userBoard']);
             });
         });
       })
       .catch(error => {
-      console.error(1, error);
       this.errorMessage = error.message;
     });
-
-
 
     console.error(2, response);
 

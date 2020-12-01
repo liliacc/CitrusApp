@@ -23,7 +23,6 @@ export class UserBoardComponent implements OnInit {
 
   ngOnInit() {
     if (!this.userAuthService.user.id) {
-      console.error('navigateBack');
       this.router.navigate(['/login']);
     }
     this.userAuthService.currentPage = 'userBoard';
@@ -46,7 +45,6 @@ export class UserBoardComponent implements OnInit {
       querySnapshot.forEach(doc => {
         const users: string[] = doc.data().users;
         if (users.includes(this.otherUserId) && users.includes(this.userAuthService.user.id)) {
-          console.error('in a cond');
           this.userAuthService.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
          // this.userAuthService.chat.subscribe(it => this.messages = it.messages);
           this.userAuthService.chatId = doc.id;
