@@ -1,9 +1,9 @@
 <div class="container app-container center-container">
-  <app-header></app-header>
+  <app-header *ngIf="userAuthService.currentPage !== 'login'"></app-header>
     <div class="page-container">
       <router-outlet></router-outlet>
     </div>
-  <app-footer></app-footer>
+  <app-footer *ngIf="userAuthService.currentPage !== 'login'"></app-footer>
 </div>
 
 <ul>

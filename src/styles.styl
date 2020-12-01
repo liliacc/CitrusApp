@@ -12,8 +12,8 @@ globals, base styles
     border-color: --var-color-primary-0
     outline-color: --var-color-primary-0
 
---var-app-header-height = 120px
---var-app-footer-height = 93px
+--var-app-header-height = 80px
+--var-app-footer-height = 70px
 --var-app-text-box-height = 118px
 
 
@@ -43,10 +43,15 @@ button
 ul
   margin: 0
   list-style-type: none
+  padding-left: 0
 a
   text-decoration: none
 .center-container
   margin: 0 auto
+.logo
+  font: --var-form-caption
+  color: --var-color-secondary-1-1
+
 /*
 layout
 */
@@ -80,7 +85,10 @@ layout
 .flex-horizontal
   display: flex
   flex-direction: row
-
+.flex-align-left
+  justify-content: flex-start
+.flex-align-right
+  justify-content: flex-end
 .flex-vertical
   display: flex
   flex-direction: column
@@ -108,10 +116,16 @@ layout
 */
 .options-container
   height: --var-app-header-height
+  padding: 0 52px
+  h1
+    font: --var-form-caption
+    color: --var-color-secondary-3-1
 .messaging-container
   height: "calc(100% - %s)" % (--var-app-header-height)
 .messages-list
   width: 45%
+  border-right: 1px solid --var-color-primary-3
+
 .chatbox-container
   width: 65%
   box-sizing: border-box

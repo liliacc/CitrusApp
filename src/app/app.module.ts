@@ -14,7 +14,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {FormsModule} from '@angular/forms';
-import { UserBoardComponent } from './components/user-board/user-board.component';
+import { UserBoardComponent } from './pages/user-board/user-board.component';
 import { UserToolBarComponent } from './components/user-tool-bar/user-tool-bar.component';
 import {SearchComponent} from './components/search/search.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';

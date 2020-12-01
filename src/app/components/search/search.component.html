@@ -1,3 +1,7 @@
 <button class="btn-primary" *ngIf="!searchUser" (click)="searchUser = true">+ Sākt saraksti</button>
-<input type="text" placeholder="Type username to send message" style="width: 100%;" *ngIf="searchUser" [(ngModel)]="searchedText" (keydown.enter)="onEnterPress()">
+<input class="search-input w-100" type="text" placeholder="Type username to send message"
+       *ngIf="searchUser"
+       [(ngModel)]="searchedText"
+       (keydown.enter)="onEnterPress()"
+>
 

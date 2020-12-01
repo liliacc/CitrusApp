@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserAuthService} from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userAuthService: UserAuthService) { }
 
   ngOnInit() {
+    this.userAuthService.currentPage = 'settings';
+
   }
 
 }

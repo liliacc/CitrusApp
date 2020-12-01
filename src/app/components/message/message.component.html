@@ -1,11 +1,13 @@
-<div class="message-container">
-  <div class="message-header">
-    <span class="caption"></span>
-    <span class="data"></span>
-  </div>
-  <div class="message-body">
-    <p class="text">
-      {{message.message}}
-    </p>
+<div class="message-wrap w-100 flex-horizontal">
+  <div class="message-container">
+    <div class="message-header flex-horizontal flex-align-center">
+      <span class="caption">{{userAuthService.user.userName}}</span>
+      <span class="data"></span>
+    </div>
+    <div class="message-body">
+      <p class="text">
+        {{message.message}}
+      </p>
+    </div>
   </div>
 </div>

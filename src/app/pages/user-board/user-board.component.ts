@@ -15,8 +15,6 @@ import {Chat} from '../../models/chat.model';
 
 export class UserBoardComponent implements OnInit {
   otherUserId: string;
-  chat: Observable<Chat>;
-  chatId: string;
 
   constructor(public userAuthService: UserAuthService,
               public db: AngularFirestore,
@@ -28,11 +26,14 @@ export class UserBoardComponent implements OnInit {
       console.error('navigateBack');
       this.router.navigate(['/login']);
     }
+    this.userAuthService.currentPage = 'userBoard';
     this.db.collection('users').get().subscribe(querySnapshot => {
       this.messagingService.users = [];
       querySnapshot.forEach(doc => {
         if (doc.id !== this.userAuthService.user.id) {
-          this.messagingService.users.push({userName: doc.data().username, id: doc.id} as User);
+
+            this.messagingService.users.push({userName: doc.data().username, id: doc.id} as User);
+
         }
       });
     });
@@ -46,9 +47,9 @@ export class UserBoardComponent implements OnInit {
         const users: string[] = doc.data().users;
         if (users.includes(this.otherUserId) && users.includes(this.userAuthService.user.id)) {
           console.error('in a cond');
-          this.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
-         // this.chat.subscribe(it => this.messages = it.messages);
-          this.chatId = doc.id;
+          this.userAuthService.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
+         // this.userAuthService.chat.subscribe(it => this.messages = it.messages);
+          this.userAuthService.chatId = doc.id;
           found = true;
         }
        // this.db.collection('chats').doc(doc.id).get().subscribe(it => this.messages = it.data().messages);
@@ -58,10 +59,10 @@ export class UserBoardComponent implements OnInit {
           .collection('chats')
           .add({messages: [], users: [this.userAuthService.user.id, this.otherUserId]})
           .then((doc2) => {
-            this.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
+            this.userAuthService.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
           //  this.db.collection('chats').doc(doc2.id).get().subscribe(it => this.messages = it.data().messages);
-          //  this.chat.subscribe(it => this.messages = it.messages);
-            this.chatId = doc2.id;
+          //  this.userAuthService.chat.subscribe(it => this.messages = it.messages);
+            this.userAuthService.chatId = doc2.id;
           });
 
       }

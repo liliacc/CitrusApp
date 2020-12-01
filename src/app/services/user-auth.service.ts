@@ -3,6 +3,8 @@ import {User} from '../models/user.model';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {Chat} from '../models/chat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,10 @@ export class UserAuthService {
   errorMessage = '';
   loginFormActive = true;
   createUserFormActive = false;
-
+  chat: Observable<Chat>;
+  chatId: string;
   user: User = new User();
+  currentPage = '';
 
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UserAuthService} from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-message',
@@ -7,7 +8,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class MessageComponent implements OnInit {
   @Input() message: any;
-  constructor() { }
+  constructor(
+    public userAuthService: UserAuthService
+  ) { }
 
   ngOnInit() {
     console.error(this.message);
