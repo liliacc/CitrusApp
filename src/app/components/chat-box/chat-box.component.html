@@ -6,6 +6,6 @@
   </ul>
 </div>
 <div class="textbox-container">
-  <textarea [(ngModel)]="messsageText" (keydown.enter)="sendMessage()"></textarea>
+  <textarea maxlength="300" [(ngModel)]="messsageText" (keydown.enter)="sendMessage()"></textarea>
 </div>
 

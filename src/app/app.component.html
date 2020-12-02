@@ -6,9 +6,3 @@
     </div>
   <app-footer *ngIf="userAuthService.currentPage !== 'login'"></app-footer>
 </div>
-
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.name}} {{item.lastName}}
-  </li>
-</ul>

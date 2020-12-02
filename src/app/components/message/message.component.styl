@@ -1,24 +1,26 @@
 @import "../../../styles/colors.styl"
 @import "../../../styles/font-styles.styl"
 @import '../../../styles.styl'
-
-.message-container
-  margin-bottom: 30px
-  width: 80%
-  .message-header
-    background-color: --var-color-transparent-1
-    height: 44px
-    padding: 20px
-    box-sizing: border-box
-    .caption
-      font: --var-base-body-caption
-  .message-body
-    padding: 20px
-    box-sizing: border-box
-    font: --var-base-body-text
+.message-wrap
+  .message-container
+    margin-bottom: 30px
+    width: 80%
+    .message-header
+      background-color: --var-color-transparent-1
+      height: 44px
+      padding: 20px
+      box-sizing: border-box
+      .caption
+        font: --var-base-body-caption
+    .message-body
+      padding: 20px
+      box-sizing: border-box
+      font: --var-base-body-text
   &.incoming
-    background-color: --var-color-secondary-1-4
     justify-content: flex-start
+    .message-container
+      background-color: --var-color-secondary-1-4
   &.outgoing
-    background-color:  --var-color-primary-0
     justify-content: flex-end
+    .message-container
+      background-color:  --var-color-primary-0
