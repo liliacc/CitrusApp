@@ -26,11 +26,12 @@ export class UserBoardComponent implements OnInit {
   ngOnInit() {
     if (!this.userAuthService.user.id) {
       this.router.navigate(['/login']);
-      console.error(this.route.snapshot.pathFromRoot);
     }
     this.userAuthService.currentPage = 'userBoard';
 
     this.chats = [];
+    this.messagingService.filteredUsers = [];
+    this.userAuthService.chat = undefined;
     this.db.collection('chats').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
         const chat: Chat = doc.data() as Chat;
@@ -38,8 +39,6 @@ export class UserBoardComponent implements OnInit {
           this.chats.push(chat);
         }
       });
-
-      console.error(888, this.chats);
 
       this.db.collection('users').get().subscribe(querySnapshot2 => {
         this.messagingService.users = [];
@@ -89,7 +88,6 @@ export class UserBoardComponent implements OnInit {
   }
 
   startChat(user: User) {
-    console.error(123, user);
     this.messagingService.otherUser = user;
     this.getChatMessages(user);
   }
