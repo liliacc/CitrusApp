@@ -1,0 +1,31 @@
+@import "../../../styles/colors.styl"
+@import "../../../styles/font-styles.styl"
+@import '../../../styles.styl'
+
+.notification-overlay
+  position: absolute
+  width: 100vw
+  height: 100 vh
+  background-color: --var-color-transparent-2
+  .notification-container
+    width: 62%
+    max-width: 701px
+    background-color: white
+    margin: 0 auto
+    .notification-header
+      background-color: --var-color-secondary-2-1
+      color: white
+      height: 74px
+      font: --var-notification-text
+    .notification-body
+      height: 285px
+      p
+        margin: 0
+        font: --var-form-caption
+        color: --var-color-secondary-3-1
+    .notification-header
+    .notification-body
+        padding: 52px
+        box-sizing: border-box
+    .btn-container
+      margin-top: 65px

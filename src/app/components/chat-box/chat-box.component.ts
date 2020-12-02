@@ -28,6 +28,7 @@ export class ChatBoxComponent implements OnInit {
   }
    sendMessage() {
     if (this.messsageText === '') { return; }
+    console.error(this.userAuthService.chatId, this.userAuthService.user);
     this.db.collection('chats').doc(this.userAuthService.chatId).update({
          messages: firestore.FieldValue.arrayUnion({ message: this.messsageText, user: this.userAuthService.user.userName})
      });

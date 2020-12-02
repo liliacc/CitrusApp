@@ -3,7 +3,6 @@
 @import '../../../styles.styl'
 
 .message-container
-  background-color: --var-color-primary-0
   margin-bottom: 30px
   width: 80%
   .message-header
@@ -19,3 +18,7 @@
     font: --var-base-body-text
   &.incoming
     background-color: --var-color-secondary-1-4
+    justify-content: flex-start
+  &.outgoing
+    background-color:  --var-color-primary-0
+    justify-content: flex-end

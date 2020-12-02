@@ -16,8 +16,8 @@ export class SearchComponent implements OnInit {
   constructor(private utils: UtilsService) { }
 
   onEnterPress() {
-
     this.searchUser = false;
+    console.error(321, this.dataArray, this.searchedText, this.atributeName);
     const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
     if (foundObject !== null && foundObject !== undefined) {
       this.foundObject.emit(foundObject);

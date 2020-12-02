@@ -20,6 +20,7 @@ export class UserAuthService {
   chatId: string;
   user: User = new User();
   currentPage = '';
+  deleteAccount = false;
 
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
@@ -49,4 +50,18 @@ export class UserAuthService {
     });
   }
 
+  getAnswer(answer) {
+    if ( answer === 'cancel' ) {
+      this.deleteAccount = false;
+    }
+    if ( answer === 'delete' ) {
+      this.angularFireAuth.auth.currentUser.delete().then(() => {
+        this.signOut();
+      });
+      this.deleteAccount = false;
+    }
+  }
+  chekIfUSerWantstoDeleteAccount() {
+    this.deleteAccount = true;
+  }
 }

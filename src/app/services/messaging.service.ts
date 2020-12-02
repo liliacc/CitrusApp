@@ -6,11 +6,10 @@ import {User} from '../models/user.model';
 })
 export class MessagingService {
   users: User[] = [];
+  filteredUsers: User[] = [];
   otherUser: User = null;
 
   constructor() { }
 
-  startChat(user: User) {
-    this.otherUser = user;
-  }
+
 }

@@ -8,9 +8,10 @@ globals, base styles
   font-family: metropolis-regular, sans-serif
   font-size: 16px
   outline-color: --var-color-primary-0
-  &:focus
-    border-color: --var-color-primary-0
-    outline-color: --var-color-primary-0
+  * >
+    &:focus
+      border-color: --var-color-primary-0
+      outline-color: --var-color-primary-0
 
 --var-app-header-height = 80px
 --var-app-footer-height = 70px
@@ -36,10 +37,15 @@ body
   overflow: hidden
 input
   display: block
+body
+  position: relative
 button
   height: 38px
   border: none
   cursor: pointer
+  background-color: transparent
+  color: --var-color-secondary-1-3
+  font: --var-bold-text
 ul
   margin: 0
   list-style-type: none
@@ -62,6 +68,7 @@ layout
   padding: 0
 .page-container
   height: "calc(100% - %s - %s)" % (--var-app-header-height --var-app-footer-height)
+  padding: 0 52px
 .main-heading
   font: --var-app-heading
   color: --var-color-secondary-1-1
@@ -89,6 +96,11 @@ layout
   justify-content: flex-start
 .flex-align-right
   justify-content: flex-end
+.flex-justify-center
+  justify-content: center
+.flex-justify-align-center
+  justify-content: center
+  align-items: center
 .flex-vertical
   display: flex
   flex-direction: column
@@ -101,6 +113,10 @@ global, shared
   text-overflow: ellipsis
 .btn-primary
   background-color: --var-color-secondary-1-1
+  color: white
+  font: --var-bold-text
+.btn-danger
+  background-color: --var-color-secondary-1-3
   color: white
   font: --var-bold-text
 
@@ -116,7 +132,6 @@ layout
 */
 .options-container
   height: --var-app-header-height
-  padding: 0 52px
   h1
     font: --var-form-caption
     color: --var-color-secondary-3-1
@@ -125,15 +140,15 @@ layout
 .messages-list
   width: 45%
   border-right: 1px solid --var-color-primary-3
-
+  padding-right: 52px
 .chatbox-container
   width: 65%
   box-sizing: border-box
   position: relative
   overflow: hidden
+  padding-left: 52px
 .messages-list,
 .chatbox-container
-  padding: 0 52px
   box-sizing: border-box
   margin-bottom: 33px
 .messages-container
@@ -144,13 +159,15 @@ layout
 form
 */
 .form-container
-  width: 1034px
+  width: 70%
+  max-width: 1034px
   height: auto
   padding: 133px 0
   background-color: --var-color-primary-0
   box-sizing: border-box
   .form-group
-    width: 662px
+    width: 90%
+    max-width: 662px
     .form-caption
       font: --var-form-caption
       color: --var-color-secondary-1-1

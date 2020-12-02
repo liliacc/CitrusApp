@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserAuthService} from '../../services/user-auth.service';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-settings',
@@ -8,11 +9,14 @@ import {UserAuthService} from '../../services/user-auth.service';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private userAuthService: UserAuthService) { }
+  constructor(
+    private userAuthService: UserAuthService,
+    public angularFireAuth: AngularFireAuth
+  ) { }
 
   ngOnInit() {
     this.userAuthService.currentPage = 'settings';
 
   }
-
 }
+

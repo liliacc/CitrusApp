@@ -14,5 +14,16 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
   }
+  chekIfIsIncoming() {
+      if (this.message.uid === this.userAuthService.user.id) {
+        return false;
+      } else {
+        return true;
+      }
+  }
+  getSenderName() {
+    return this.message.user;
+  }
+
 
 }

@@ -1,7 +1,7 @@
 <div class="message-wrap w-100 flex-horizontal">
-  <div class="message-container">
+  <div class="message-container" [ngClass]="{'incoming': chekIfIsIncoming(), 'outgoing': !chekIfIsIncoming()}">
     <div class="message-header flex-horizontal flex-align-center">
-      <span class="caption">{{userAuthService.user.userName}}</span>
+      <span class="caption"> {{getSenderName()}}</span>
       <span class="data"></span>
     </div>
     <div class="message-body">

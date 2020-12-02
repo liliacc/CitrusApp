@@ -2,9 +2,9 @@
   <div class="logo">CitrusApp</div>
   <nav>
     <ul class="app-navigation flex-horizontal">
-      <li class="navigation-item active"><a routerLink="/userBoard" routerLinkActive="active">Saziņa</a></li>
-      <li class="navigation-item"><a routerLink="/help" routerLinkActive="active">Palīdzība</a></li>
-      <li class="navigation-item"><a routerLink="/settings" routerLinkActive="active">Iestatījumi</a></li>
+      <li class="navigation-item" routerLinkActive="active"><a routerLink="/userBoard">Saziņa</a></li>
+      <li class="navigation-item" routerLinkActive="active"><a routerLink="/help">Palīdzība</a></li>
+      <li class="navigation-item" routerLinkActive="active"><a routerLink="/settings">Iestatījumi</a></li>
       <li class="navigation-item" (click)="this.userAuthService.signOut()">Iziet</li>
     </ul>
   </nav>

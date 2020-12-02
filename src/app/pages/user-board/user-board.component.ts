@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserAuthService} from '../../services/user-auth.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {MessagingService} from '../../services/messaging.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import {Chat} from '../../models/chat.model';
@@ -15,28 +15,52 @@ import {Chat} from '../../models/chat.model';
 
 export class UserBoardComponent implements OnInit {
   otherUserId: string;
+  chats: Chat[] = [];
 
   constructor(public userAuthService: UserAuthService,
               public db: AngularFirestore,
               public messagingService: MessagingService,
-              public router: Router) { }
+              public router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (!this.userAuthService.user.id) {
       this.router.navigate(['/login']);
+      console.error(this.route.snapshot.pathFromRoot);
     }
     this.userAuthService.currentPage = 'userBoard';
-    this.db.collection('users').get().subscribe(querySnapshot => {
-      this.messagingService.users = [];
+
+    this.chats = [];
+    this.db.collection('chats').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
-        if (doc.id !== this.userAuthService.user.id) {
-
-            this.messagingService.users.push({userName: doc.data().username, id: doc.id} as User);
-
+        const chat: Chat = doc.data() as Chat;
+        if (chat.users.includes(this.userAuthService.user.id)) {
+          this.chats.push(chat);
         }
       });
+
+      console.error(888, this.chats);
+
+      this.db.collection('users').get().subscribe(querySnapshot2 => {
+        this.messagingService.users = [];
+        querySnapshot2.forEach(doc2 => {
+          const doc = doc2.data();
+
+          if (this.userAuthService.user.id !== doc2.id) {
+            this.messagingService.users.push({userName: doc.username, id: doc2.id} as User);
+            for (const chat of this.chats) {
+              if (chat.users.includes(doc2.id)) {
+                this.messagingService.filteredUsers.push({userName: doc.username, id: doc2.id} as User);
+                break;
+              }
+            }
+
+          }
+        });
+      });
+
     });
-    console.error(1231231323, this.messagingService.users);
+
   }
   getChatMessages(otherUser: User) {
     this.otherUserId = otherUser.id;
@@ -46,11 +70,9 @@ export class UserBoardComponent implements OnInit {
         const users: string[] = doc.data().users;
         if (users.includes(this.otherUserId) && users.includes(this.userAuthService.user.id)) {
           this.userAuthService.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
-         // this.userAuthService.chat.subscribe(it => this.messages = it.messages);
           this.userAuthService.chatId = doc.id;
           found = true;
         }
-       // this.db.collection('chats').doc(doc.id).get().subscribe(it => this.messages = it.data().messages);
       });
       if (!found) {
         this.db
@@ -58,13 +80,17 @@ export class UserBoardComponent implements OnInit {
           .add({messages: [], users: [this.userAuthService.user.id, this.otherUserId]})
           .then((doc2) => {
             this.userAuthService.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
-          //  this.db.collection('chats').doc(doc2.id).get().subscribe(it => this.messages = it.data().messages);
-          //  this.userAuthService.chat.subscribe(it => this.messages = it.messages);
             this.userAuthService.chatId = doc2.id;
           });
 
       }
     });
 
+  }
+
+  startChat(user: User) {
+    console.error(123, user);
+    this.messagingService.otherUser = user;
+    this.getChatMessages(user);
   }
 }

@@ -1,10 +1,14 @@
 <div class="options-container flex-horizontal space-between flex-align-center">
     <h1>Hello, {{userAuthService.user.userName}}!</h1>
-  <app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="messagingService.startChat($event)"></app-search>
+  <app-search [dataArray]="messagingService.users" [atributeName]="'userName'" (foundObject)="startChat($event)"></app-search>
 </div>
 <div class="messaging-container flex-horizontal">
   <ul class="messages-list">
-    <li class="messages-list-item flex-horizontal flex-align-center" [class.selected]="item.id === otherUserId" *ngFor="let item of messagingService.users" (click)="getChatMessages(item)">
+    <li class="messages-list-item flex-horizontal flex-align-center"
+        [class.selected]="item.id === otherUserId"
+        *ngFor="let item of messagingService.filteredUsers"
+        (click)="getChatMessages(item)"
+    >
       <span class="caption overflow-ellipsis">{{item.userName}}</span>
       <span class="text overflow-ellipsis">{{item.lastMessage}}</span>
     </li>

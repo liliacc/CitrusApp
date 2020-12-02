@@ -23,6 +23,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HelpComponent } from './pages/help/help.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MessageComponent } from './components/message/message.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MessageComponent } from './components/message/message.component';
     FooterComponent,
     HelpComponent,
     SettingsComponent,
-    MessageComponent
+    MessageComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
