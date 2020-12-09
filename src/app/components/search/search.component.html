@@ -1,5 +1,5 @@
 <button class="btn-primary" *ngIf="!searchUser" (click)="searchUser = true">+ Sākt saraksti</button>
-<input class="search-input w-100" type="text" placeholder="Meklēt"
+<input class="search-input w-100" type="text" placeholder="Meklēt pēc lietotājvārda"
        *ngIf="searchUser"
        [(ngModel)]="searchedText"
        (keydown.enter)="onEnterPress()"

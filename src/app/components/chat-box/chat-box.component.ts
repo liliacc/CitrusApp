@@ -4,8 +4,6 @@ import {MessagingService} from '../../services/messaging.service';
 import {UserAuthService} from '../../services/user-auth.service';
 import {Observable} from 'rxjs';
 import {Chat} from '../../models/chat.model';
-import {last} from 'rxjs/operators';
-import {Message} from '../../models/message.model';
 import {firestore} from 'firebase';
 
 @Component({

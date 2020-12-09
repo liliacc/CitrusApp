@@ -10,7 +10,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class SettingsComponent implements OnInit {
 
   constructor(
-    private userAuthService: UserAuthService,
+    public userAuthService: UserAuthService,
     public angularFireAuth: AngularFireAuth
   ) { }
 
