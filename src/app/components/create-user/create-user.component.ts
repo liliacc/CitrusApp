@@ -16,7 +16,7 @@ export class CreateUserComponent implements OnInit {
   error = false;
   errorMessage: string;
 
-  constructor(private firestore: AngularFirestore,
+  constructor(private angularFirestore: AngularFirestore,
               public userAuthService: UserAuthService,
               public angularFireAuth: AngularFireAuth,
               public router: Router,
@@ -24,47 +24,9 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
   }
-    async createNewUSerAccount(email, password): Promise<firebase.auth.UserCredential> {
-      return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
-    }
-
-  async createNewUser() {
-    const newUserData = {
-      displayName: this.userAuthService.user.userName,
-      email: this.userAuthService.user.email,
-      password: this.userAuthService.user.password,
-  };
-    const email = newUserData.email;
-    const password = newUserData.password;
-
-    this.errorMessage = '';
-    const response = await this.createNewUSerAccount(email, password)
-      .then(async data => {
-        await new Promise<any>((resolve, reject) => {
-          this.firestore
-            .collection('users')
-            .doc(data.user.uid)
-            .set({
-              username: this.userAuthService.user.userName,
-              name: this.userAuthService.user.name,
-              lastName: this.userAuthService.user.lastName,
-            })
-            .then(() => {
-              this.userAuthService.user.id = data.user.uid;
-              this.router.navigate(['/userBoard']);
-            });
-        });
-      })
-      .catch(error => {
-      this.errorMessage = error.message;
-    });
-
-    console.error(2, response);
-
-
-
-
-  }
+   async newUser() {
+    await this.userAuthService.createNewUser();
+   }
   newF() {
     this.router.navigate(['/userBoard']);
   }

@@ -12,12 +12,5 @@ export class HeaderComponent implements OnInit {
   constructor( public userAuthService: UserAuthService, private router: Router ) { }
 
   ngOnInit() {
-    // console.error(this.router.getCurrentNavigation());
   }
-  // checkIfActiveLink() {
-  // this.userAuthService.currentPage;
-  //   switch() {
-  //
-  //   }
-  // }
 }

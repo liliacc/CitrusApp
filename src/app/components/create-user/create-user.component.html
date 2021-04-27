@@ -9,9 +9,8 @@
     <input class="input-field w-100" type="text" placeholder="vārds"  [(ngModel)]="userAuthService.user.name" name="firstName" ngModel required/>
     <input class="input-field w-100" type="text" placeholder="uzvārds"  [(ngModel)]="userAuthService.user.lastName" name="lastName" ngModel required/>
     <input class="input-field w-100" type="password" placeholder="parole"  [(ngModel)]="userAuthService.user.password" name="password" ngModel required/>
-    <button class="btn-primary w-100" (click)="createNewUser()">Izveidot kontu</button>
+    <button class="btn-primary w-100" (click)="newUser()">Izveidot kontu</button>
     <div class="underlined-figure w-100 text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
     <div class="error">{{errorMessage}}</div>
   </div>
 </form>
-

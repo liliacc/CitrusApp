@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Chat} from '../models/chat.model';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +25,53 @@ export class UserAuthService {
 
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
-              public db: AngularFirestore) {
+              public angularFirestore: AngularFirestore) {
+  }
+  async createNewUSerAccount(email, password): Promise<firebase.auth.UserCredential> {
+    return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  async createNewUser() {
+    const newUserData = {
+      displayName: this.user.userName,
+      email: this.user.email,
+      password: this.user.password,
+    };
+    const email = newUserData.email;
+    const password = newUserData.password;
+
+    this.errorMessage = '';
+    const response = await this.createNewUSerAccount(email, password)
+      .then(async data => {
+        await new Promise<any>((resolve, reject) => {
+          this.angularFirestore
+            .collection('users')
+            .doc(data.user.uid)
+            .set({
+              username: this.user.userName,
+              name: this.user.name,
+              lastName: this.user.lastName,
+            })
+            .then(() => {
+              this.user.id = data.user.uid;
+              this.router.navigate(['/userBoard']);
+            });
+        });
+      })
+      .catch(error => {
+        this.errorMessage = error.message;
+      });
+
+    console.error(2, response);
+
+  }
   signInUser() {
     const email = this.typedInEmailForSignIn;
     const password = this.typedInPassForSignIn;
     this.errorMessage = '';
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then(loginResponsePayload => {
-        this.db.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(user => {
+        this.angularFirestore.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(user => {
           this.user.userName = user.data().username;
           this.user.id = loginResponsePayload.user.uid;
           this.router.navigate(['/userBoard']);

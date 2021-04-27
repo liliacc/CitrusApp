@@ -18,7 +18,7 @@ export class UserBoardComponent implements OnInit {
   chats: Chat[] = [];
 
   constructor(public userAuthService: UserAuthService,
-              public db: AngularFirestore,
+              public angularFirestore: AngularFirestore,
               public messagingService: MessagingService,
               public router: Router,
               private route: ActivatedRoute) { }
@@ -32,7 +32,7 @@ export class UserBoardComponent implements OnInit {
     this.chats = [];
     this.messagingService.filteredUsers = [];
     this.userAuthService.chat = undefined;
-    this.db.collection('chats').get().subscribe(querySnapshot => {
+    this.angularFirestore.collection('chats').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
         const chat: Chat = doc.data() as Chat;
         if (chat.users.includes(this.userAuthService.user.id)) {
@@ -40,7 +40,7 @@ export class UserBoardComponent implements OnInit {
         }
       });
 
-      this.db.collection('users').get().subscribe(querySnapshot2 => {
+      this.angularFirestore.collection('users').get().subscribe(querySnapshot2 => {
         this.messagingService.users = [];
         querySnapshot2.forEach(doc2 => {
           const doc = doc2.data();
@@ -63,22 +63,22 @@ export class UserBoardComponent implements OnInit {
   }
   getChatMessages(otherUser: User) {
     this.otherUserId = otherUser.id;
-    this.db.collection('chats').get().subscribe(querySnapshot => {
+    this.angularFirestore.collection('chats').get().subscribe(querySnapshot => {
       let found = false;
       querySnapshot.forEach(doc => {
         const users: string[] = doc.data().users;
         if (users.includes(this.otherUserId) && users.includes(this.userAuthService.user.id)) {
-          this.userAuthService.chat = this.db.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
+          this.userAuthService.chat = this.angularFirestore.collection('chats').doc(doc.id).valueChanges() as Observable<Chat>;
           this.userAuthService.chatId = doc.id;
           found = true;
         }
       });
       if (!found) {
-        this.db
+        this.angularFirestore
           .collection('chats')
           .add({messages: [], users: [this.userAuthService.user.id, this.otherUserId]})
           .then((doc2) => {
-            this.userAuthService.chat = this.db.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
+            this.userAuthService.chat = this.angularFirestore.collection('chats').doc(doc2.id).valueChanges() as Observable<Chat>;
             this.userAuthService.chatId = doc2.id;
           });
 

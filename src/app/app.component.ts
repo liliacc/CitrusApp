@@ -12,7 +12,10 @@ import {UserAuthService} from './services/user-auth.service';
 export class AppComponent {
   items: Observable<User[]>;
   title = 'CitrusApp';
-  constructor(public db: AngularFirestore, public userAuthService: UserAuthService) {
-    this.items = db.collection('users').valueChanges() as Observable<User[]>;
+  constructor( public angularFirestore: AngularFirestore,
+               public userAuthService: UserAuthService
+  ) {
+    this.items = angularFirestore.collection('users').valueChanges() as Observable<User[]>;
+    console.error(this.items);
   }
 }

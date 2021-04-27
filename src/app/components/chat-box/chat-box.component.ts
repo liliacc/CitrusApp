@@ -18,7 +18,7 @@ export class ChatBoxComponent implements OnInit {
   id: any;
   messsageText = '';
   constructor(public userAuthService: UserAuthService,
-              public db: AngularFirestore,
+              public angularFirestore: AngularFirestore,
               public messagingService: MessagingService,
               ) { }
   ngOnInit() {
@@ -26,10 +26,8 @@ export class ChatBoxComponent implements OnInit {
   }
    sendMessage() {
     if (this.messsageText === '') { return; }
-    console.error(this.userAuthService.chatId, this.userAuthService.user);
-    this.db.collection('chats').doc(this.userAuthService.chatId).update({
-         messages: firestore.FieldValue.arrayUnion({ message: this.messsageText, user: this.userAuthService.user.userName})
-     });
+    // console.error(this.userAuthService.chatId, this.userAuthService.user);
+    this.messagingService.updateChat(this.messsageText, this.userAuthService.user);
     this.messsageText = '';
   }
 
