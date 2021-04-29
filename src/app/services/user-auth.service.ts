@@ -129,12 +129,23 @@ export class UserAuthService {
     if (this.chatId  === null || this.chatId === '') {
       return;
     }
-    this.angularFirestore.collection('chats').doc(this.chatId).update({
-      users: firebase.firestore.FieldValue.arrayRemove(this.user.id)
-    })
-      .catch((error) => {
-        console.error('Error removing document: ', error);
-      });
+    this.chat = undefined;
+
+    window.setTimeout(() => {
+      this.angularFirestore.collection('chats').doc(this.chatId).update({
+        users: firebase.firestore.FieldValue.arrayRemove(this.user.id)
+      })
+        .catch((error) => {
+          console.error('Error removing document: ', error);
+        });
+      this.angularFirestore.collection('chats').doc(this.chatId).update({
+        deletedUsers: [this.user.id]
+      })
+        .catch((error) => {
+          console.error('Error adding data field: ', error);
+        });
+    }, 200);
+
     // this.angularFirestore.collection('chats').doc(this.chatId).get().subscribe(chatDocumentSnap => {
     //   const chat: Chat = chatDocumentSnap.data() as Chat;
     //  // for (let index = 0; index < chat.users.length; index++) {

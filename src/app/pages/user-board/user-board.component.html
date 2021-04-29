@@ -17,7 +17,7 @@
     <li class="messages-list-item"></li>
     <li class="messages-list-item"></li>
   </ul>
-  <div class="chatbox-container">
+  <div class="chatbox-container" *ngIf="userAuthService.chat">
 
     <app-chat-box [chat]="userAuthService.chat"></app-chat-box>
   </div>

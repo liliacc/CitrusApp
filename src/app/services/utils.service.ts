@@ -9,13 +9,10 @@ export class UtilsService {
 
 
   findObjectInArray(dataArray: any[], searchedText: string, atributeName: string): any {
-    console.log(dataArray);
     for (const dataItem of dataArray) {
-      console.log('DATAITEM', dataItem);
       if (searchedText === dataItem[atributeName]) {
         return dataItem;
       }
-      console.log('nukk');
     }
   }
 }
