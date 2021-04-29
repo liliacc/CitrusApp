@@ -16,6 +16,6 @@ export class AppComponent {
                public userAuthService: UserAuthService
   ) {
     this.items = angularFirestore.collection('users').valueChanges() as Observable<User[]>;
-    console.error(this.items);
+    // console.error(this.items);
   }
 }

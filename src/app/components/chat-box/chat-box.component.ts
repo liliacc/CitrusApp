@@ -4,7 +4,6 @@ import {MessagingService} from '../../services/messaging.service';
 import {UserAuthService} from '../../services/user-auth.service';
 import {Observable} from 'rxjs';
 import {Chat} from '../../models/chat.model';
-import {firestore} from 'firebase';
 
 @Component({
   selector: 'app-chat-box',

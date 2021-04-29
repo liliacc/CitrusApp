@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {Chat} from '../models/chat.model';
 import * as firebase from 'firebase';
 import {firestore} from 'firebase';
+import FieldValue = firebase.firestore.FieldValue;
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class UserAuthService {
               public router: Router,
               public angularFirestore: AngularFirestore) {
   }
+
   async createNewUSerAccount(email, password): Promise<firebase.auth.UserCredential> {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
   }
@@ -66,6 +68,7 @@ export class UserAuthService {
     console.error(2, response);
 
   }
+
   signInUser() {
     const email = this.typedInEmailForSignIn;
     const password = this.typedInPassForSignIn;
@@ -90,38 +93,67 @@ export class UserAuthService {
   }
 
   getAnswer(answer) {
-    if ( answer === 'cancel' ) {
+    if (answer === 'cancel') {
       this.deleteAccount = false;
     }
-    if ( answer === 'delete' ) {
+    if (answer === 'delete') {
       this.angularFireAuth.auth.currentUser.delete().then(() => {
         this.signOut();
       });
       this.deleteAccount = false;
     }
   }
+
   chekIfUSerWantstoDeleteAccount() {
     this.deleteAccount = true;
   }
-  deleteChatMessage(message, user) {
+
+  deleteChatMessage(message) {
     this.angularFirestore.collection('chats').doc(this.chatId).get().subscribe(chatDocumentSnap => {
       const chat: Chat = chatDocumentSnap.data() as Chat;
-      console.error(chat);
-      for (let item of chat.messages) {
-        console.error(12, item.message, message, item.user, user);
-        if (item.message === message && item.user === user) {
-          console.error(1213, item.message, message, item.user, user);
+      for (const item of chat.messages) {
+        if (item.message === message && item.user === this.user.userName) {
           item.message = 'Ziņa tika dzēsta';
           item.timestamp = new Date();
+          break;
         }
       }
-      console.error(chat.messages);
-
       this.angularFirestore.collection('chats').doc(this.chatId).update({
         messages: chat.messages
-      }).then(r => {});
-
+      }).then(r => {
+      });
     });
+  }
+
+  removeChat() {
+    if (this.chatId  === null || this.chatId === '') {
+      return;
+    }
+    this.angularFirestore.collection('chats').doc(this.chatId).update({
+      users: firebase.firestore.FieldValue.arrayRemove(this.user.id)
+    })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
+    // this.angularFirestore.collection('chats').doc(this.chatId).get().subscribe(chatDocumentSnap => {
+    //   const chat: Chat = chatDocumentSnap.data() as Chat;
+    //  // for (let index = 0; index < chat.users.length; index++) {
+    //     // if (chat.users[index] === this.user.id) {
+    //     //  chat.users[index] = null;
+    //     //  break;
+    //     // }
+    //   // }
+    //
+    //   console.error(this.chatId);
+    //
+    //   this.angularFirestore.collection('chats').doc(chatDocumentSnap.id).update({
+    //     users: FieldValue.arrayRemove(this.user.id)
+    //   }).then();
+    //   // this.angularFirestore.collection('chats').doc(chatDocumentSnap.id).update({
+    //   //   users: chat.users
+    //   //   }).then(r => {
+    //   //   });
+    // });
 
   }
-  }
+}

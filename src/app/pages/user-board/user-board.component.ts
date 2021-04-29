@@ -84,7 +84,6 @@ export class UserBoardComponent implements OnInit {
 
       }
     });
-
   }
 
   startChat(user: User) {

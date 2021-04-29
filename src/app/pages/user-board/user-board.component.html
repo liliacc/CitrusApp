@@ -11,6 +11,8 @@
     >
       <span class="caption overflow-ellipsis">{{item.userName}}</span>
       <span class="text overflow-ellipsis">{{item.lastMessage}}</span>
+      <button (click)="userAuthService.removeChat()">Dzēst</button>
+
     </li>
     <li class="messages-list-item"></li>
     <li class="messages-list-item"></li>
