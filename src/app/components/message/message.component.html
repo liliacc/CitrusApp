@@ -3,6 +3,7 @@
     <div class="message-header flex-horizontal flex-align-center">
       <span class="caption"> {{getSenderName()}}</span>
       <span class="data"></span>
+      <button (click)="userAuthService.deleteChatMessage(message.message, message.user)">Dzēst</button>
     </div>
     <div class="message-body">
       <p class="text">

@@ -25,6 +25,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { MessageComponent } from './components/message/message.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

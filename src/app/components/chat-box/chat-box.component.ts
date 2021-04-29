@@ -27,7 +27,7 @@ export class ChatBoxComponent implements OnInit {
    sendMessage() {
     if (this.messsageText === '') { return; }
     // console.error(this.userAuthService.chatId, this.userAuthService.user);
-    this.messagingService.updateChat(this.messsageText, this.userAuthService.user);
+    this.messagingService.updateChat(this.messsageText, this.userAuthService.user.userName);
     this.messsageText = '';
   }
 

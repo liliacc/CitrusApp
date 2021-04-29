@@ -6,6 +6,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Chat} from '../models/chat.model';
 import * as firebase from 'firebase';
+import {firestore} from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -102,4 +103,25 @@ export class UserAuthService {
   chekIfUSerWantstoDeleteAccount() {
     this.deleteAccount = true;
   }
-}
+  deleteChatMessage(message, user) {
+    this.angularFirestore.collection('chats').doc(this.chatId).get().subscribe(chatDocumentSnap => {
+      const chat: Chat = chatDocumentSnap.data() as Chat;
+      console.error(chat);
+      for (let item of chat.messages) {
+        console.error(12, item.message, message, item.user, user);
+        if (item.message === message && item.user === user) {
+          console.error(1213, item.message, message, item.user, user);
+          item.message = 'Ziņa tika dzēsta';
+          item.timestamp = new Date();
+        }
+      }
+      console.error(chat.messages);
+
+      this.angularFirestore.collection('chats').doc(this.chatId).update({
+        messages: chat.messages
+      }).then(r => {});
+
+    });
+
+  }
+  }

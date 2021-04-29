@@ -8,6 +8,7 @@ import {UserAuthService} from '../../services/user-auth.service';
 })
 export class MessageComponent implements OnInit {
   @Input() message: any;
+
   constructor(
     public userAuthService: UserAuthService
   ) { }
