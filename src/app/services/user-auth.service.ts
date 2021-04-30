@@ -14,6 +14,7 @@ import FieldValue = firebase.firestore.FieldValue;
 })
 
 export class UserAuthService {
+  typedInEmailForRecovery = '';
   typedInEmailForSignIn = '';
   typedInPassForSignIn = '';
   errorMessage = '';
@@ -24,7 +25,7 @@ export class UserAuthService {
   user: User = new User();
   currentPage = '';
   deleteAccount = false;
-
+  recoverPass = false;
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
               public angularFirestore: AngularFirestore) {
@@ -35,6 +36,13 @@ export class UserAuthService {
   }
 
   async createNewUser(createUSerForm) {
+    console.error(createUSerForm);
+    this.user.userName = createUSerForm.form.value.userName;
+    this.user.email = createUSerForm.form.value.email;
+    this.user.password = createUSerForm.form.value.password;
+    this.user.name = createUSerForm.form.value.firstName;
+    this.user.lastName = createUSerForm.form.value.lastName;
+
     const newUserData = {
       displayName: this.user.userName,
       email: this.user.email,
@@ -69,7 +77,7 @@ export class UserAuthService {
 
   }
 
-  signInUser() {
+  signInUser(loginUser) {
     const email = this.typedInEmailForSignIn;
     const password = this.typedInPassForSignIn;
     this.errorMessage = '';
@@ -146,5 +154,16 @@ export class UserAuthService {
         });
     }, 200);
 
+  }
+  resetPassword(emailAddress) {
+    this.recoverPass = true;
+    if (this.typedInEmailForRecovery === '' || null) {
+      return;
+    }
+    this.angularFireAuth.auth.sendPasswordResetEmail(emailAddress).then(() => {
+      this.recoverPass = false;
+    }).catch((error) => {
+      console.error('notSent');
+    });
   }
 }

@@ -1,10 +1,51 @@
-<form id="signIn" class="form-container center-container">
+<form id="signIn" class="form-container center-container"
+      (ngSubmit)="userAuthService.signInUser(loginUser)"
+      #loginUser="ngForm">
   <div class="form-group center-container">
+    <div *ngIf="userAuthService.recoverPass === false">
     <h1 class="form-caption text-center">Ienākt</h1>
-    <input class="input-field w-100" type="email" placeholder="e-pasts" name="email" [(ngModel)]="userAuthService.typedInEmailForSignIn"/>
-    <input class="input-field w-100" type="password" placeholder="parole" name="password" [(ngModel)]="userAuthService.typedInPassForSignIn"/>
-    <button class="w-100 btn-primary" type="submit" (click)="userAuthService.signInUser()">Ienākt</button>
-    <div class="errorMessage">{{userAuthService.errorMessage}}</div>
-    <div class="w-100 underlined-figure text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
+    <input class="input-field w-100"
+           type="email"
+           placeholder="e-pasts"
+           name="email"
+           [(ngModel)]="userAuthService.typedInEmailForSignIn"
+           ngModel
+           email
+           required
+           #email="ngModel"/>
+    <div class="form-error-text"
+         *ngIf="!email.valid && email.touched">Ievadiet atbilstošu e-pasta adresi!</div>
+    <input class="input-field w-100"
+           type="password"
+           placeholder="parole"
+           name="password"
+           [(ngModel)]="userAuthService.typedInPassForSignIn"
+           ngModel
+           required
+           #password="ngModel"/>
+    <div class="form-error-text"
+         *ngIf="!loginUser.valid && loginUser.touched">Pārbaudiet paroles lauku!</div>
+    <button class="w-100 btn-primary"
+            type="submit"
+            (click)="userAuthService.signInUser(loginUser)"
+            [disabled]="!loginUser.valid">Ienākt</button>
+    <div class="errorMessage form-error-text">{{userAuthService.errorMessage}}</div>
+
+    </div>
+    <input class="input-field w-100"
+           type="email"
+           placeholder="e-pasts"
+           name="email"
+           [(ngModel)]="userAuthService.typedInEmailForRecovery"
+           ngModel
+           email
+           required
+           #recoveryEmail="ngModel"
+           *ngIf="userAuthService.recoverPass" (keydown.enter)="userAuthService.resetPassword(userAuthService.typedInEmailForRecovery)"/>
+    <div *ngIf="userAuthService.recoverPass">Ievadiet epastu un nospiediet taustiņu enter!</div>
+    <div class="flex-horizontal space-between" *ngIf="!userAuthService.recoverPass">
+      <div class="w-100 underlined-figure" (click)="userAuthService.resetPassword(userAuthService.typedInEmailForRecovery)">Atgādināt paroli</div>
+      <div class="w-100 underlined-figure text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
+    </div>
   </div>
 </form>

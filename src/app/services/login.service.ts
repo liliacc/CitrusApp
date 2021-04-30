@@ -14,6 +14,6 @@ export class LoginService {
   }
 
   getFormToggleButtonName() {
-    return this.loginFormActive ? 'Izveidot lietotāja kontu' : 'Ienākt';
+    return this.loginFormActive ? 'Izveidot kontu' : 'Ienākt';
   }
 }
