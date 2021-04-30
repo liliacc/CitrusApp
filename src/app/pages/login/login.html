@@ -1,5 +1,8 @@
 <div class="container login-page-container center-container">
-  <h1 class="main-heading text-center">CitrusApp</h1>
+  <div class="logo"style="height: 3em;">
+    <img src="assets/CitrusAppLogo.svg" alt="logo" style="height: 50%; display: inline-block;">
+    <div style="display: inline-block; margin: 0; line-height: 3em;" >CitrusApp</div>
+  </div>
   <app-create-user *ngIf="loginService.createUserFormActive"></app-create-user>
   <app-signin-user *ngIf="loginService.loginFormActive"></app-signin-user>
 </div>

@@ -1,16 +1,67 @@
-<form class="form-container signUpForm center-container">
+<form class="form-container signUpForm center-container" (ngSubmit)="newUser(createUSerForm)" #createUSerForm="ngForm" appPasswordValidation>
   <div class="form-group  center-container">
     <h1 class="form-caption text-center">Izveidot kontu</h1>
-    <input class="input-field w-100" type="email" placeholder="e-pasts"
-           [(ngModel)]="userAuthService.user.email"
-           name="email" ngModel required/>
+    <input class="input-field w-100"
+           type="email"
+           placeholder="e-pasts"
+           ngModel
+           name="email"
+           email
+           required
+          #email="ngModel"/>
+    <div class="form-error-text" *ngIf="!email.valid && email.touched">Ievadiet atbilstošu e-pasta adresi!</div>
     <p class="inputFieldError" *ngIf="error"></p>
-    <input class="input-field w-100" type="text" placeholder="lietotājvārds"  [(ngModel)]="userAuthService.user.userName" name="userName" ngModel required/>
-    <input class="input-field w-100" type="text" placeholder="vārds"  [(ngModel)]="userAuthService.user.name" name="firstName" ngModel required/>
-    <input class="input-field w-100" type="text" placeholder="uzvārds"  [(ngModel)]="userAuthService.user.lastName" name="lastName" ngModel required/>
-    <input class="input-field w-100" type="password" placeholder="parole"  [(ngModel)]="userAuthService.user.password" name="password" ngModel required/>
-    <button class="btn-primary w-100" (click)="newUser()">Izveidot kontu</button>
-    <div class="underlined-figure w-100 text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
+    <input class="input-field w-100"
+           type="text"
+           placeholder="lietotājvārds"
+           [(ngModel)]="userAuthService.user.userName"
+           ngModel
+           name="userName"
+           required
+           #userName="ngModel"/>
+    <div class="form-error-text" *ngIf="!userName.valid && userName.touched">Ievadiet lietotājvārdu!</div>
+    <input class="input-field w-100"
+           type="text" placeholder="vārds"
+           [(ngModel)]="userAuthService.user.name"
+           ngModel
+           name="firstName"
+           required
+           #firstName="ngModel"/>
+    <div class="form-error-text" *ngIf="!firstName.valid && firstName.touched">Ievadiet vārdu!</div>
+    <input class="input-field w-100"
+           type="text"
+           placeholder="uzvārds"
+           [(ngModel)]="userAuthService.user.lastName"
+           ngModel
+           name="lastName"
+           required
+           #lastName="ngModel"/>
+    <div class="form-error-text" *ngIf="!lastName.valid && lastName.touched">Ievadiet uzvārdu!</div>
+    <input class="input-field w-100"
+           type="password"
+           placeholder="parole"
+           [(ngModel)]="userAuthService.user.password"
+           ngModel
+           name="password"
+           required
+           #password="ngModel"/>
+    <div class="form-error-text" *ngIf="!password.valid && password.touched">Aizpildiet paroles lauku!</div>
+    <input class="input-field w-100"
+           type="password"
+           placeholder="Apstiprināt paroli"
+           [(ngModel)]="userAuthService.user.confirmPassword"
+           ngModel
+           name="confirmPassword"
+           required
+           appPasswordValidation="password"
+           #confirmPassword="ngModel"/>
+    <div class="form-error-text" *ngIf="!confirmPassword.valid && confirmPassword.touched">Pārbaudiet paroles lauku!</div>
+    <button class="btn-primary w-100"
+            (click)="newUser(createUSerForm)"
+            [disabled]="!createUSerForm.valid"
+    >Izveidot kontu</button>
+    <div class="underlined-figure w-100 text-right"
+         (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
     <div class="error">{{errorMessage}}</div>
   </div>
 </form>

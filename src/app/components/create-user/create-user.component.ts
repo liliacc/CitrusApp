@@ -24,8 +24,8 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
   }
-   async newUser() {
-    await this.userAuthService.createNewUser();
+   async newUser(createUSerForm) {
+    await this.userAuthService.createNewUser(createUSerForm);
    }
   newF() {
     this.router.navigate(['/userBoard']);

@@ -24,6 +24,7 @@ import { HelpComponent } from './pages/help/help.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MessageComponent } from './components/message/message.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { PaswordValidationDirective } from './directives/pasword-validation.directive';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NotificationComponent } from './components/notification/notification.co
     HelpComponent,
     SettingsComponent,
     MessageComponent,
-    NotificationComponent
+    NotificationComponent,
+    PaswordValidationDirective
   ],
   imports: [
     BrowserModule,

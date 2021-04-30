@@ -34,7 +34,7 @@ export class UserAuthService {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  async createNewUser() {
+  async createNewUser(createUSerForm) {
     const newUserData = {
       displayName: this.user.userName,
       email: this.user.email,
@@ -145,26 +145,6 @@ export class UserAuthService {
           console.error('Error adding data field: ', error);
         });
     }, 200);
-
-    // this.angularFirestore.collection('chats').doc(this.chatId).get().subscribe(chatDocumentSnap => {
-    //   const chat: Chat = chatDocumentSnap.data() as Chat;
-    //  // for (let index = 0; index < chat.users.length; index++) {
-    //     // if (chat.users[index] === this.user.id) {
-    //     //  chat.users[index] = null;
-    //     //  break;
-    //     // }
-    //   // }
-    //
-    //   console.error(this.chatId);
-    //
-    //   this.angularFirestore.collection('chats').doc(chatDocumentSnap.id).update({
-    //     users: FieldValue.arrayRemove(this.user.id)
-    //   }).then();
-    //   // this.angularFirestore.collection('chats').doc(chatDocumentSnap.id).update({
-    //   //   users: chat.users
-    //   //   }).then(r => {
-    //   //   });
-    // });
 
   }
 }
