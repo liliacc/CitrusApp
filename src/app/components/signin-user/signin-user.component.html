@@ -27,22 +27,33 @@
          *ngIf="!loginUser.valid && loginUser.touched">Pārbaudiet paroles lauku!</div>
     <button class="w-100 btn-primary"
             type="submit"
-            (click)="userAuthService.signInUser(loginUser)"
             [disabled]="!loginUser.valid">Ienākt</button>
     <div class="errorMessage form-error-text">{{userAuthService.errorMessage}}</div>
 
     </div>
-    <input class="input-field w-100"
-           type="email"
-           placeholder="e-pasts"
-           name="email"
-           [(ngModel)]="userAuthService.typedInEmailForRecovery"
-           ngModel
-           email
-           required
-           #recoveryEmail="ngModel"
-           *ngIf="userAuthService.recoverPass" (keydown.enter)="userAuthService.resetPassword(userAuthService.typedInEmailForRecovery)"/>
-    <div *ngIf="userAuthService.recoverPass">Ievadiet epastu un nospiediet taustiņu enter!</div>
+
+    <div class="flex-vertical space-between" *ngIf="userAuthService.recoverPass">
+      <h1 class="form-caption text-center">Atgādināt paroli</h1>
+      <input class="input-field w-100"
+             type="email"
+             placeholder="e-pasts"
+             name="email"
+             [(ngModel)]="userAuthService.typedInEmailForRecovery"
+             ngModel
+             email
+             required
+             #recoveryEmail="ngModel"
+             (keydown.enter)="userAuthService.resetPassword(userAuthService.typedInEmailForRecovery)"/>
+      <div class="form-error-text"
+           *ngIf="!recoveryEmail.valid && recoveryEmail.touched">Ievadiet atbilstošu e-pasta adresi!</div>
+      <div>Ievadiet epastu un nospiediet taustiņu enter!</div>
+      <div class="flex-horizontal space-between">
+        <div class="w-100 underlined-figure" (click)="userAuthService.showLoginForm()">Ienākt kontā</div>
+        <div class="w-100 underlined-figure text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>
+      </div>
+    </div>
+
+
     <div class="flex-horizontal space-between" *ngIf="!userAuthService.recoverPass">
       <div class="w-100 underlined-figure" (click)="userAuthService.resetPassword(userAuthService.typedInEmailForRecovery)">Atgādināt paroli</div>
       <div class="w-100 underlined-figure text-right" (click)="loginService.toggleUSerForm()">{{loginService.getFormToggleButtonName()}}</div>

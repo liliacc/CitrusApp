@@ -8,6 +8,7 @@ import {Chat} from '../models/chat.model';
 import * as firebase from 'firebase';
 import {firestore} from 'firebase';
 import FieldValue = firebase.firestore.FieldValue;
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,14 @@ export class UserAuthService {
   chatId: string;
   user: User = new User();
   currentPage = '';
-  deleteAccount = false;
+  deleteData = false;
   recoverPass = false;
+  // signInForm: any;
   constructor(public angularFireAuth: AngularFireAuth,
               public router: Router,
-              public angularFirestore: AngularFirestore) {
+              public angularFirestore: AngularFirestore,
+              public loginService: LoginService
+  ) {
   }
 
   async createNewUSerAccount(email, password): Promise<firebase.auth.UserCredential> {
@@ -54,6 +58,7 @@ export class UserAuthService {
     this.errorMessage = '';
     const response = await this.createNewUSerAccount(email, password)
       .then(async data => {
+        await data.user.sendEmailVerification();
         await new Promise<any>((resolve, reject) => {
           this.angularFirestore
             .collection('users')
@@ -65,8 +70,13 @@ export class UserAuthService {
             })
             .then(() => {
               this.user.id = data.user.uid;
-              this.router.navigate(['/userBoard']);
-            });
+              // this.router.navigate(['/userBoard']);
+              window.alert('Lūdzu verificējiet epasta adresi, uzspiežot uz epastā saņemto linku');
+              this.loginService.loginFormActive = true;
+              this.loginService.createUserFormActive = false;
+              createUSerForm.form.reset();
+            }).then(() => {
+          });
         });
       })
       .catch(error => {
@@ -83,12 +93,18 @@ export class UserAuthService {
     this.errorMessage = '';
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then(loginResponsePayload => {
+        if (!loginResponsePayload.user.emailVerified) {
+          window.alert('Epasta verifikācija nav veikta, lūdzu verificēt epastu!');
+          return;
+        }
         this.angularFirestore.collection('users').doc(loginResponsePayload.user.uid).get().subscribe(user => {
           this.user.userName = user.data().username;
           this.user.id = loginResponsePayload.user.uid;
           this.router.navigate(['/userBoard']);
         });
-      })
+      }).then(() => {
+        loginUser.form.reset();
+    })
       .catch(error => {
         this.errorMessage = error.message;
       });
@@ -102,18 +118,18 @@ export class UserAuthService {
 
   getAnswer(answer) {
     if (answer === 'cancel') {
-      this.deleteAccount = false;
+      this.deleteData = false;
     }
     if (answer === 'delete') {
       this.angularFireAuth.auth.currentUser.delete().then(() => {
         this.signOut();
       });
-      this.deleteAccount = false;
+      this.deleteData = false;
     }
   }
 
   chekIfUSerWantstoDeleteAccount() {
-    this.deleteAccount = true;
+    this.deleteData = true;
   }
 
   deleteChatMessage(message) {
@@ -155,6 +171,11 @@ export class UserAuthService {
     }, 200);
 
   }
+  showLoginForm() {
+    this.loginService.loginFormActive = true ;
+    this.recoverPass = false;
+  }
+
   resetPassword(emailAddress) {
     this.recoverPass = true;
     if (this.typedInEmailForRecovery === '' || null) {
@@ -162,8 +183,9 @@ export class UserAuthService {
     }
     this.angularFireAuth.auth.sendPasswordResetEmail(emailAddress).then(() => {
       this.recoverPass = false;
+      this.showLoginForm();
     }).catch((error) => {
-      console.error('notSent');
+      window.alert('Ievadītais ēpasts neeksistē! Mēģiniet vēlreiz!');
     });
   }
 }

@@ -66,6 +66,9 @@
            #confirmPassword="ngModel"/>
     <div class="form-error-text"
          *ngIf="!confirmPassword.valid && confirmPassword.touched">Pārbaudiet paroles lauku!</div>
+    <div class="form-error-text"
+         *ngIf="email.valid && email.touched">Lai reģistrētu kontu epasta verifikācija ir obligāta!</div>
+
     <button class="btn-primary w-100"
             (click)="newUser(createUSerForm)"
             [disabled]="!createUSerForm.valid"

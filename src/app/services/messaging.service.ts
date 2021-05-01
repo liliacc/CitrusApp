@@ -11,7 +11,6 @@ export class MessagingService {
   users: User[] = [];
   filteredUsers: User[] = [];
   otherUser: User = null;
-
   constructor( private angularFirestore: AngularFirestore,
                private userAuthService: UserAuthService
   ) { }

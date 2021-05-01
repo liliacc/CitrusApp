@@ -11,10 +11,11 @@ export class SigninUserComponent implements OnInit {
 
   constructor(public userAuthService: UserAuthService,
               public loginService: LoginService) { }
+  // loginUser = this.userAuthService.signInForm;
+
 
   ngOnInit() {
   }
-
 }
 
 
