@@ -18,6 +18,7 @@ import {firestore} from 'firebase';
 export class UserBoardComponent implements OnInit {
   otherUserId: string;
   chats: Chat[] = [];
+  chatsWithUsers: any[] = [];
 
   constructor(public userAuthService: UserAuthService,
               public angularFirestore: AngularFirestore,
@@ -32,10 +33,18 @@ export class UserBoardComponent implements OnInit {
     }
     this.userAuthService.currentPage = 'userBoard';
 
-    this.chats = [];
-    this.messagingService.filteredUsers = [];
     this.userAuthService.chat = undefined;
 
+    this.reloadChats();
+    this.angularFirestore.collection('chats').snapshotChanges().subscribe(() => {
+      this.reloadChats();
+    });
+
+  }
+
+  reloadChats() {
+    this.chats = [];
+    this.messagingService.filteredUsers = [];
     this.angularFirestore.collection('chats').get().subscribe(querySnapshot => {
       querySnapshot.forEach(doc => {
         const chat: Chat = doc.data() as Chat;
@@ -51,9 +60,9 @@ export class UserBoardComponent implements OnInit {
           if (this.userAuthService.user.id !== doc2.id) {
             this.messagingService.users.push({userName: doc.username, id: doc2.id} as User);
             for (const chat of this.chats) {
-              if (chat.users.includes(doc2.id)) {
-                this.messagingService.filteredUsers.push({userName: doc.username, id: doc2.id} as User);
-                break;
+              if (chat.users.includes(doc2.id) || chat.deletedUsers && chat.deletedUsers.includes(doc2.id)) {
+              this.messagingService.filteredUsers.push({userName: doc.username, id: doc2.id} as User);
+              break;
               }
             }
 
@@ -62,7 +71,6 @@ export class UserBoardComponent implements OnInit {
       });
 
     });
-
   }
 
   getChatMessages(otherUser: User) {

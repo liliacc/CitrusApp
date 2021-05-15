@@ -4,4 +4,4 @@
        [(ngModel)]="searchedText"
        (keydown.enter)="onEnterPress()"
 >
-<div> Lietotājs ar šādu lietotājvārdu nav atrasts!</div>
+<div *ngIf="notFound"> Lietotājs ar šādu lietotājvārdu nav atrasts!</div>

@@ -1,4 +1,5 @@
-<form id="signIn" class="form-container center-container"
+<div class="flex-horizontal flex-justify-space-evenly">
+<form id="signIn" class="form-container"
       (ngSubmit)="userAuthService.signInUser(loginUser)"
       #loginUser="ngForm">
   <div class="form-group center-container">
@@ -60,3 +61,7 @@
     </div>
   </div>
 </form>
+<div class="flex-vertical flex-justify-align-center">
+  <button class="btn-primary" (click)="userAuthService.signInWithGoogle()">Ienākt ar google kontu</button>
+</div>
+</div>

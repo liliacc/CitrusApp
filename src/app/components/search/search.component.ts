@@ -10,6 +10,7 @@ import {MessagingService} from '../../services/messaging.service';
 export class SearchComponent implements OnInit {
   searchedText = '';
   searchUser = true;
+  notFound = false;
   @Input() dataArray: any[];
   @Input() atributeName: string;
   @Output() foundObject = new EventEmitter();
@@ -17,11 +18,14 @@ export class SearchComponent implements OnInit {
 
   onEnterPress() {
     this.searchUser = false;
+    this.notFound = false;
     const foundObject = this.utils.findObjectInArray(this.dataArray, this.searchedText, this.atributeName);
     if (foundObject !== null && foundObject !== undefined) {
       // this.messagingService.foundOtherUser = true;
       this.foundObject.emit(foundObject);
-   }
+    } else {
+      this.notFound = true;
+    }
   }
   ngOnInit() {
   }
